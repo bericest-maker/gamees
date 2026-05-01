@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Arcade Library</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #gameModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #gameFrame {
+            width: 960px;
+            height: 600px;
+            border: none;
+            background: #222;
+        }
+        .close-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .close-btn:hover {
+            background: #e84118;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,19 +47,41 @@
     </header>
 
     <main class="game-grid" id="gameGrid">
-        <div class="game-card" onclick="openGame('games/game1.html')">
-            <img src="https://via.placeholder.com/150" alt="Game 1 Thumbnail">
-            <h3>Super Adventure</h3>
-            <p>Action / Platformer</p>
-        </div>
-
-        <div class="game-card" onclick="openGame('games/game2.html')">
-            <img src="https://via.placeholder.com/150" alt="Game 2 Thumbnail">
-            <h3>Puzzle Master</h3>
-            <p>Brain / Puzzle</p>
+        <div class="game-card" onclick="openGame('games/ragdoll-hit.html')">
+            <img src="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/ragdoll-hit/thumbnail.png" alt="Ragdoll Hit">
+            <h3>Ragdoll Hit</h3>
+            <p>Action / Unity</p>
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <div id="gameModal">
+        <iframe id="gameFrame" src=""></iframe>
+        <button class="close-btn" onclick="closeGame()">Close Game</button>
+    </div>
+
+    <script>
+        function openGame(url) {
+            document.getElementById('gameFrame').src = url;
+            document.getElementById('gameModal').style.display = 'flex';
+        }
+
+        function closeGame() {
+            document.getElementById('gameModal').style.display = 'none';
+            document.getElementById('gameFrame').src = ''; // Stops the game from running in the background
+        }
+
+        function filterGames() {
+            const input = document.getElementById('searchBar').value.toLowerCase();
+            const cards = document.getElementsByClassName('game-card');
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
