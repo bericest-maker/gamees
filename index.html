@@ -3,85 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Arcade Library</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Ragdoll Hit</title>
     <style>
-        #gameModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Removes margins and scrollbars to make the game full screen */
+        body, html {
+            margin: 0;
+            padding: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            overflow: hidden;
+            background-color: #000;
         }
-        #gameFrame {
-            width: 960px;
-            height: 600px;
+        
+        /* Forces the game window to take up 100% of the screen */
+        iframe {
+            width: 100%;
+            height: 100%;
             border: none;
-            background: #222;
-        }
-        .close-btn {
-            margin-top: 20px;
-            padding: 12px 25px;
-            background: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .close-btn:hover {
-            background: #e84118;
+            display: block;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>🎮 My Game Library</h1>
-        <input type="text" id="searchBar" placeholder="Search for games..." onkeyup="filterGames()">
-    </header>
 
-    <main class="game-grid" id="gameGrid">
-        <div class="game-card" onclick="openGame('games/ragdoll-hit.html')">
-            <img src="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/ragdoll-hit/thumbnail.png" alt="Ragdoll Hit">
-            <h3>Ragdoll Hit</h3>
-            <p>Action / Unity</p>
-        </div>
-    </main>
+    <iframe class="game-iframe" id="game-area" src="https://freetoplayz.github.io/ragdoll-hit/" width="100%" height="100%" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; display-capture" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads" scrolling="none" frameborder="0" allowfullscreen></iframe>
 
-    <div id="gameModal">
-        <iframe id="gameFrame" src=""></iframe>
-        <button class="close-btn" onclick="closeGame()">Close Game</button>
-    </div>
-
-    <script>
-        function openGame(url) {
-            document.getElementById('gameFrame').src = url;
-            document.getElementById('gameModal').style.display = 'flex';
-        }
-
-        function closeGame() {
-            document.getElementById('gameModal').style.display = 'none';
-            document.getElementById('gameFrame').src = ''; // Stops the game from running in the background
-        }
-
-        function filterGames() {
-            const input = document.getElementById('searchBar').value.toLowerCase();
-            const cards = document.getElementsByClassName('game-card');
-            for (let i = 0; i < cards.length; i++) {
-                const title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                if (title.includes(input)) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
-    </script>
 </body>
 </html>
