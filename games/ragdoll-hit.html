@@ -10,20 +10,177 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
             background-color: #000;
+            font-family: Arial, sans-serif;
         }
+
+        /* Container keeping the game and leaving room for the bottom button */
+        .game-container {
+            width: 100%;
+            height: 92%;
+            position: relative;
+        }
+
         iframe {
             width: 100%;
             height: 100%;
             border: none;
             display: block;
         }
+
+        /* Bottom right floating hold button */
+        .hold-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 150px;
+            height: 50px;
+            background: rgba(0, 122, 255, 0.85);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            transition: background 0.2s;
+            overflow: hidden;
+        }
+
+        .hold-btn:hover {
+            background: rgba(0, 122, 255, 1);
+        }
+
+        /* Visual progress bar */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            width: 0;
+            background-color: #00ff66;
+            transition: width 0.05s linear;
+        }
+
+        /* Bottom button area below the game */
+        .bottom-area {
+            height: 8%;
+            background-color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #333;
+        }
+
+        .bottom-btn {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .bottom-btn:hover {
+            background-color: #005999;
+        }
     </style>
 </head>
 <body>
 
-    <iframe class="game-iframe" id="game-area" src="https://freetoplayz.github.io/ragdoll-hit/" width="100%" height="100%" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; display-capture" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads" scrolling="none" frameborder="0" allowfullscreen></iframe>
+    <div class="game-container">
+        <iframe class="game-iframe" id="game-area" src="https://freetoplayz.github.io/ragdoll-hit/" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; display-capture" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads" scrolling="none" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <button id="hold-button" class="hold-btn">
+        Hold for Fullscreen
+        <div id="progress-bar" class="progress-bar"></div>
+    </button>
+
+    <div class="bottom-area">
+        <button id="bottom-button" class="bottom-btn">Enter Fullscreen</button>
+    </div>
+
+    <script>
+        const holdButton = document.getElementById('hold-button');
+        const progressBar = document.getElementById('progress-bar');
+        const bottomButton = document.getElementById('bottom-button');
+        
+        let holdTimer = null;
+        let holdDuration = 2000; // 2 seconds
+        let startTime = 0;
+        let isHolding = false;
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error("Error enabling full screen:", err.message);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function startHold(e) {
+            if (isHolding) return;
+            isHolding = true;
+            startTime = Date.now();
+            progressBar.style.width = '0%';
+
+            holdTimer = setInterval(() => {
+                let elapsed = Date.now() - startTime;
+                let percentage = (elapsed / holdDuration) * 100;
+
+                if (percentage >= 100) {
+                    progressBar.style.width = '100%';
+                    stopHold();
+                    toggleFullscreen();
+                } else {
+                    progressBar.style.width = percentage + '%';
+                }
+            }, 30);
+        }
+
+        function stopHold() {
+            if (!isHolding) return;
+            isHolding = false;
+            clearInterval(holdTimer);
+            progressBar.style.width = '0%';
+        }
+
+        // Event listeners for holding the floating button
+        holdButton.addEventListener('mousedown', startHold);
+        holdButton.addEventListener('mouseup', stopHold);
+        holdButton.addEventListener('mouseleave', stopHold);
+
+        holdButton.addEventListener('touchstart', startHold);
+        holdButton.addEventListener('touchend', stopHold);
+        holdButton.addEventListener('touchcancel', stopHold);
+
+        // Event listener for the click-button on the bottom page
+        bottomButton.addEventListener('click', toggleFullscreen);
+
+        // Update button text when full screen state changes
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                holdButton.textContent = 'Hold to Exit';
+                bottomButton.textContent = 'Exit Fullscreen';
+            } else {
+                holdButton.textContent = 'Hold for Fullscreen';
+                bottomButton.textContent = 'Enter Fullscreen';
+            }
+            holdButton.appendChild(progressBar); // keep the progress bar child
+        });
+    </script>
 
 </body>
 </html>
