@@ -2,7 +2,18 @@
 <html lang="en">
 
 <head>
-	<script src="/poki-sdk.js"></script>
+	<script>
+var PokiSDK = {
+  init: () => Promise.resolve(),
+  gameLoadingStart: () => {},
+  gameLoadingFinished: () => {},
+  gameplayStart: () => {},
+  gameplayStop: () => {},
+  happyTime: () => {},
+  setDebug: () => {},
+  gameLoadingProgress: () => {}
+};
+</script>
 	<meta name="robots" content="noindex,nofollow" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="pragma" content="no-cache" />
