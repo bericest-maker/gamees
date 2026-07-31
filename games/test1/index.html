@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Final Test - Babylon.js</title>
+    <style>
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #1a1a2e; }
+        #renderCanvas { width: 100%; height: 100%; touch-action: none; }
+        #ui {
+            position: absolute; top: 10px; left: 10px; color: #00ff88;
+            font-family: 'Segoe UI', monospace; font-size: 14px;
+            background: rgba(0,0,0,0.7); padding: 12px 16px; border-radius: 8px;
+            border: 1px solid #00ff88; pointer-events: none; user-select: none;
+        }
+        #ui h3 { margin: 0 0 8px 0; color: #fff; }
+        #ui .key { color: #ffd700; font-weight: bold; }
+        #ui .status { color: #00ff88; }
+        #ui .status.running { color: #ff4444; }
+        #error { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+            color: #ff4444; background: rgba(0,0,0,0.9); padding: 30px; border-radius: 12px;
+            border: 2px solid #ff4444; font-family: monospace; display: none; max-width: 80%;
+        }
+    </style>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+<base target="_blank">
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <div id="ui">
+        <h3>Controls</h3>
+        <div><span class="key">W A S D</span> — Move</div>
+        <div><span class="key">Shift</span> — Toggle Run</div>
+        <div><span class="key">Space</span> — Jump</div>
+        <div><span class="key">R</span> — Ragdoll / Reset</div>
+        <div style="margin-top:8px;">State: <span id="state" class="status">Idle</span></div>
+        <div>Speed: <span id="speed">0</span></div>
+    </div>
+    <div id="error"></div>
+
+    <script>
+        const canvas = document.getElementById("renderCanvas");
+        const engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+
+        const showError = (msg) => {
+            const el = document.getElementById("error");
+            el.style.display = "block";
+            el.innerHTML = `<h2>❌ Error</h2><p>${msg}</p>`;
+            console.error(msg);
+        };
+
+        // Check if running from file://
+        if (window.location.protocol === "file:") {
+            showError(`
+                <b>You opened this file directly!</b><br><br>
+                Babylon.js cannot load .glb files from file:// due to browser security (CORS).<br><br>
+                <b>Fix:</b> Use a local server.<br><br>
+                <b>Option 1 (Python):</b><br>
+                Open CMD in this folder and run:<br>
+                <code style="color:#ffd700">python -m http.server 8000</code><br>
+                Then go to <code style="color:#00ff88">http://localhost:8000</code><br><br>
+                <b>Option 2 (VS Code):</b><br>
+                Install "Live Server" extension → Right-click index.html → "Open with Live Server"
+            `);
+        }
+
+        const createScene = async () => {
+            const scene = new BABYLON.Scene(engine);
+            scene.clearColor = new BABYLON.Color3(0.05, 0.05, 0.12);
+            scene.ambientColor = new BABYLON.Color3(0.3, 0.3, 0.4);
+
+            // ---- Camera ----
+            const camera = new BABYLON.ArcRotateCamera("cam", -Math.PI/2, Math.PI/3, 12, BABYLON.Vector3.Zero(), scene);
+            camera.attachControl(canvas, true);
+            camera.lowerRadiusLimit = 3;
+            camera.upperRadiusLimit = 30;
+            camera.wheelPrecision = 50;
+
+            // ---- Lighting ----
+            const hemi = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, 0), scene);
+            hemi.intensity = 0.6;
+            hemi.groundColor = new BABYLON.Color3(0.1, 0.1, 0.2);
+
+            const dir = new BABYLON.DirectionalLight("dir", new BABYLON.Vector3(-1, -2, -1), scene);
+            dir.intensity = 0.8;
+            dir.position = new BABYLON.Vector3(10, 20, 10);
+
+            const shadowGen = new BABYLON.ShadowGenerator(2048, dir);
+            shadowGen.useBlurExponentialShadowMap = true;
+            shadowGen.blurKernel = 32;
+
+            // ---- Skybox ----
+            const skybox = BABYLON.MeshBuilder.CreateBox("sky", { size: 1000 }, scene);
+            const skyMat = new BABYLON.StandardMaterial("skyMat", scene);
+            skyMat.backFaceCulling = false;
+            skyMat.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            skyMat.emissiveColor = new BABYLON.Color3(0.05, 0.05, 0.15);
+            skybox.material = skyMat;
+            skybox.infiniteDistance = true;
+
+            // ---- Baseplate ----
+            const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 100, height: 100, subdivisions: 4 }, scene);
+            const groundMat = new BABYLON.StandardMaterial("groundMat", scene);
+            groundMat.diffuseColor = new BABYLON.Color3(0.15, 0.18, 0.22);
+            groundMat.specularColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+            const gridTex = new BABYLON.DynamicTexture("gridTex", 512, scene);
+            const ctx = gridTex.getContext();
+            ctx.fillStyle = "#222833";
+            ctx.fillRect(0, 0, 512, 512);
+            ctx.strokeStyle = "#3a4a5a";
+            ctx.lineWidth = 2;
+            for (let i = 0; i <= 512; i += 32) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 512); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(512, i); ctx.stroke();
+            }
+            gridTex.update();
+            groundMat.diffuseTexture = gridTex;
+            groundMat.diffuseTexture.uScale = 20;
+            groundMat.diffuseTexture.vScale = 20;
+            ground.material = groundMat;
+            ground.receiveShadows = true;
+
+            // ---- Physics (Cannon.js) ----
+            const cannon = await import("https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js");
+            const physicsPlugin = new BABYLON.CannonJSPlugin(true, 10, cannon);
+            scene.enablePhysics(new BABYLON.Vector3(0, -9.81, 0), physicsPlugin);
+
+            // Ground physics body - FIXED: use setFromEuler instead of setFromEulerAngles
+            const groundBody = new cannon.Body({
+                mass: 0,
+                shape: new cannon.Plane(),
+                quaternion: new cannon.Quaternion().setFromEuler(-Math.PI/2, 0, 0, 'XYZ')
+            });
+            physicsPlugin.world.addBody(groundBody);
+
+            // ---- Load Character ----
+            BABYLON.SceneLoader.ShowLoadingScreen = false;
+            const result = await BABYLON.SceneLoader.ImportMeshAsync(
+                "", "./", "human final test.glb", scene
+            );
+
+            const characterRoot = result.meshes[0];
+            characterRoot.position.y = 0.1;
+            characterRoot.scaling = new BABYLON.Vector3(1, 1, 1);
+
+            let characterMesh = null;
+            let skeleton = null;
+            for (const mesh of result.meshes) {
+                if (mesh.skeleton) {
+                    characterMesh = mesh;
+                    skeleton = mesh.skeleton;
+                    break;
+                }
+            }
+            if (!characterMesh) {
+                characterMesh = result.meshes.find(m => m.getTotalVertices() > 0) || result.meshes[1] || result.meshes[0];
+            }
+
+            if (characterMesh) {
+                characterMesh.receiveShadows = true;
+                shadowGen.addShadowCaster(characterMesh, true);
+            }
+
+            // ---- Animation Setup ----
+            const animGroups = result.animationGroups || [];
+            let idleAnim = null, walkAnim = null, runAnim = null;
+
+            console.log("Animation Groups found:", animGroups.map(a => a.name));
+
+            for (const ag of animGroups) {
+                const name = ag.name.toLowerCase();
+                if (name.includes("idle")) idleAnim = ag;
+                else if (name.includes("walk")) walkAnim = ag;
+                else if (name.includes("run")) runAnim = ag;
+            }
+
+            if (!idleAnim && animGroups[0]) idleAnim = animGroups[0];
+            if (!walkAnim && animGroups[1]) walkAnim = animGroups[1];
+            if (!runAnim && animGroups[2]) runAnim = animGroups[2];
+
+            animGroups.forEach(ag => ag.stop());
+            if (idleAnim) {
+                idleAnim.play(true);
+                idleAnim.speedRatio = 1;
+            }
+
+            // ---- Character Controller ----
+            const WALK_SPEED = 3.5;
+            const RUN_SPEED = 8.0;
+            let isRunning = false;
+            let currentSpeed = 0;
+            let targetSpeed = 0;
+            let moveDir = new BABYLON.Vector3(0, 0, 0);
+            let isJumping = false;
+
+            const capsuleHeight = 1.8;
+            const capsuleRadius = 0.35;
+            const charBody = new cannon.Body({
+                mass: 70,
+                shape: new cannon.Cylinder(capsuleRadius, capsuleRadius, capsuleHeight, 12),
+                position: new cannon.Vec3(0, capsuleHeight/2 + 0.1, 0),
+                fixedRotation: true,
+                linearDamping: 0.9,
+                angularDamping: 0.9
+            });
+            physicsPlugin.world.addBody(charBody);
+
+            const boneMap = {};
+            const boneBodies = [];
+            let ragdollEnabled = false;
+
+            if (skeleton) {
+                skeleton.bones.forEach(bone => { boneMap[bone.name] = bone; });
+            }
+
+            function createRagdoll() {
+                if (ragdollEnabled || !skeleton) return;
+                ragdollEnabled = true;
+                charBody.type = cannon.Body.STATIC;
+                charBody.velocity.set(0, 0, 0);
+
+                const boneDefs = [
+                    { name: "Hips", mass: 15, size: [0.25, 0.15, 0.2] },
+                    { name: "Spine", mass: 10, size: [0.2, 0.3, 0.15] },
+                    { name: "Chest", mass: 10, size: [0.25, 0.25, 0.18] },
+                    { name: "Neck", mass: 2, size: [0.08, 0.1, 0.08] },
+                    { name: "Head", mass: 5, size: [0.15, 0.18, 0.16] },
+                    { name: "UpperArm_L", mass: 3, size: [0.08, 0.25, 0.08] },
+                    { name: "LowerArm_L", mass: 2, size: [0.07, 0.22, 0.07] },
+                    { name: "Hand_L", mass: 1, size: [0.08, 0.08, 0.08] },
+                    { name: "UpperArm_R", mass: 3, size: [0.08, 0.25, 0.08] },
+                    { name: "LowerArm_R", mass: 2, size: [0.07, 0.22, 0.07] },
+                    { name: "Hand_R", mass: 1, size: [0.08, 0.08, 0.08] },
+                    { name: "UpperLeg_L", mass: 5, size: [0.12, 0.35, 0.12] },
+                    { name: "LowerLeg_L", mass: 4, size: [0.1, 0.35, 0.1] },
+                    { name: "Foot_L", mass: 2, size: [0.1, 0.08, 0.18] },
+                    { name: "UpperLeg_R", mass: 5, size: [0.12, 0.35, 0.12] },
+                    { name: "LowerLeg_R", mass: 4, size: [0.1, 0.35, 0.1] },
+                    { name: "Foot_R", mass: 2, size: [0.1, 0.08, 0.18] },
+                ];
+
+                boneDefs.forEach(def => {
+                    const bone = boneMap[def.name];
+                    if (!bone) return;
+                    const worldPos = bone.getAbsolutePosition ? bone.getAbsolutePosition(characterMesh) : characterMesh.position.clone();
+                    const shape = new cannon.Box(new cannon.Vec3(def.size[0]/2, def.size[1]/2, def.size[2]/2));
+                    const body = new cannon.Body({
+                        mass: def.mass,
+                        shape: shape,
+                        position: new cannon.Vec3(worldPos.x, worldPos.y, worldPos.z),
+                        linearDamping: 0.5,
+                        angularDamping: 0.5
+                    });
+                    physicsPlugin.world.addBody(body);
+                    boneBodies.push({ name: def.name, body, bone, def });
+                });
+
+                boneBodies.forEach(bb => {
+                    bb.body.applyImpulse(
+                        new cannon.Vec3((Math.random()-0.5)*2, Math.random()*3, (Math.random()-0.5)*2),
+                        bb.body.position
+                    );
+                });
+            }
+
+            function resetRagdoll() {
+                if (!ragdollEnabled) return;
+                ragdollEnabled = false;
+                boneBodies.forEach(bb => { physicsPlugin.world.removeBody(bb.body); });
+                boneBodies.length = 0;
+                charBody.type = cannon.Body.DYNAMIC;
+                charBody.position.set(0, capsuleHeight/2 + 0.1, 0);
+                charBody.velocity.set(0, 0, 0);
+                charBody.angularVelocity.set(0, 0, 0);
+                characterRoot.position.set(0, 0.1, 0);
+                characterRoot.rotationQuaternion = BABYLON.Quaternion.Identity();
+                if (skeleton) skeleton.returnToRest();
+            }
+
+            // ---- Input ----
+            const inputMap = {};
+            window.addEventListener("keydown", (e) => {
+                inputMap[e.key.toLowerCase()] = true;
+                if (e.key.toLowerCase() === "shift") isRunning = !isRunning;
+                if (e.code === "Space" && !isJumping && !ragdollEnabled) {
+                    charBody.velocity.y = 6;
+                    isJumping = true;
+                }
+                if (e.key.toLowerCase() === "r") {
+                    if (ragdollEnabled) resetRagdoll(); else createRagdoll();
+                }
+            });
+            window.addEventListener("keyup", (e) => { inputMap[e.key.toLowerCase()] = false; });
+
+            // ---- Animation Blending ----
+            let currentAnim = idleAnim;
+            let targetAnim = idleAnim;
+            let blendWeight = 1;
+            const BLEND_SPEED = 0.08;
+
+            function setAnimation(anim) {
+                if (anim === targetAnim || !anim) return;
+                if (targetAnim && targetAnim !== anim) {
+                    currentAnim = targetAnim;
+                    targetAnim = anim;
+                    blendWeight = 0;
+                    anim.play(true);
+                    anim.weight = 0;
+                } else {
+                    targetAnim = anim;
+                    anim.play(true);
+                    anim.weight = 1;
+                }
+            }
+
+            // ---- Game Loop ----
+            const stateLabel = document.getElementById("state");
+            const speedLabel = document.getElementById("speed");
+
+            scene.registerBeforeRender(() => {
+                if (ragdollEnabled) {
+                    const hips = boneBodies.find(b => b.name === "Hips");
+                    if (hips) {
+                        characterRoot.position.x = hips.body.position.x;
+                        characterRoot.position.z = hips.body.position.z;
+                    }
+                    stateLabel.textContent = "Ragdoll";
+                    stateLabel.className = "status running";
+                    return;
+                }
+
+                moveDir.set(0, 0, 0);
+                if (inputMap["w"]) moveDir.z += 1;
+                if (inputMap["s"]) moveDir.z -= 1;
+                if (inputMap["a"]) moveDir.x -= 1;
+                if (inputMap["d"]) moveDir.x += 1;
+                if (moveDir.length() > 0) moveDir.normalize();
+
+                const maxSpeed = isRunning ? RUN_SPEED : WALK_SPEED;
+                targetSpeed = moveDir.length() > 0 ? maxSpeed : 0;
+                currentSpeed += (targetSpeed - currentSpeed) * 0.15;
+
+                const camForward = camera.getForwardRay().direction;
+                camForward.y = 0;
+                camForward.normalize();
+                const camRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), camForward).normalize();
+                const worldMove = camForward.scale(moveDir.z).add(camRight.scale(moveDir.x));
+                if (worldMove.length() > 0) worldMove.normalize();
+
+                const vel = charBody.velocity;
+                vel.x = worldMove.x * currentSpeed;
+                vel.z = worldMove.z * currentSpeed;
+
+                if (charBody.position.y < capsuleHeight/2 + 0.15) isJumping = false;
+
+                characterRoot.position.x = charBody.position.x;
+                characterRoot.position.z = charBody.position.z;
+                characterRoot.position.y = charBody.position.y - capsuleHeight/2 + 0.1;
+
+                if (worldMove.length() > 0.1 && currentSpeed > 0.5) {
+                    const targetRot = Math.atan2(worldMove.x, worldMove.z);
+                    let currentRot = characterRoot.rotation.y;
+                    let diff = targetRot - currentRot;
+                    while (diff > Math.PI) diff -= Math.PI * 2;
+                    while (diff < -Math.PI) diff += Math.PI * 2;
+                    characterRoot.rotation.y += diff * 0.12;
+                }
+
+                let animName = "Idle";
+                if (currentSpeed > 0.5) {
+                    if (isRunning && currentSpeed > WALK_SPEED + 0.5) {
+                        setAnimation(runAnim); animName = "Running";
+                    } else {
+                        setAnimation(walkAnim); animName = "Walking";
+                    }
+                } else {
+                    setAnimation(idleAnim); animName = "Idle";
+                }
+
+                if (currentAnim && targetAnim && currentAnim !== targetAnim) {
+                    blendWeight += BLEND_SPEED;
+                    if (blendWeight >= 1) {
+                        blendWeight = 1;
+                        currentAnim.stop();
+                        currentAnim = targetAnim;
+                    }
+                    currentAnim.weight = 1 - blendWeight;
+                    targetAnim.weight = blendWeight;
+                }
+
+                if (walkAnim) walkAnim.speedRatio = Math.max(0.5, currentSpeed / WALK_SPEED);
+                if (runAnim) runAnim.speedRatio = Math.max(0.8, currentSpeed / RUN_SPEED);
+
+                const targetPos = characterRoot.position.clone();
+                targetPos.y += 1.2;
+                camera.target = BABYLON.Vector3.Lerp(camera.target, targetPos, 0.08);
+
+                stateLabel.textContent = animName + (isRunning ? " (Run Mode)" : "");
+                stateLabel.className = isRunning ? "status running" : "status";
+                speedLabel.textContent = currentSpeed.toFixed(1);
+            });
+
+            return scene;
+        };
+
+        createScene().then(scene => {
+            engine.runRenderLoop(() => scene.render());
+            window.addEventListener("resize", () => engine.resize());
+        }).catch(err => {
+            showError(`Scene creation failed:<br><code>${err.message}</code><br><br>Check the browser console (F12) for details.`);
+        });
+    </script>
+</body>
+</html>
