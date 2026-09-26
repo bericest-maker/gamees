@@ -10,57 +10,57 @@
 ## 🎯 GOALS (roadmap — everything below is "do later")
 
 ### UI
-- [ ] Shop tabs like the original: PRODUCTION / UNITS / DECORATION / SPECIAL
-- [ ] Tooltips with full stats: classes, damage modifiers, footprint (UnitSize)
-- [ ] Achievements panel (see ACHIEVEMENTS)
-- [ ] Leaderboard stub: rebirths / power / cash / time
-- [ ] Crate UI for the full rarity ladder (new colors for Limited / Unique / Rebirth)
+- [x] Shop tabs like the original: PRODUCTION / UNITS / DECORATION / SPECIAL (+ UNITS sub-tabs per class) — v4
+- [x] Tooltips with full stats: classes, damage modifiers, footprint (UnitSize)
+- [x] Achievements panel (see ACHIEVEMENTS) — v4 🏆
+- [x] Leaderboard stub — v4 📊 (8 factions by power + flags held)
+- [x] Crate UI for the full rarity ladder (new colors for Limited / Unique / Rebirth)
 
 ### Game (mechanics)
-- [ ] **Damage modifiers (matchups)** — damage multiplied per TARGET class (e.g. Heavy Tank: armored ×1.2, light ×0.7, air ×0.5, stealth ✝; Anti-Air Vehicle: air ×1.5, ground ✝). Replaces/augments current flat armor.
-- [ ] **Multi-class units** — 2+ classes per unit (Party Wagon = Light+Armored, Aerial Assault Carrier = Air+Armored, Phantom = Stealth+Armored…)
-- [ ] **UnitSize footprints** — units occupy 1–20 cells (spawn space + caps)
+- [x] **Damage modifiers (matchups)** (v4) — damage multiplied per TARGET class (e.g. Heavy Tank: armored ×1.2, light ×0.7, air ×0.5, stealth ✝; Anti-Air Vehicle: air ×1.5, ground ✝). Replaces/augments current flat armor.
+- [x] **Multi-class units** (v4: Phantom, Spectre, Saboteur, Stealth Heli, B-2) — 2+ classes per unit (Party Wagon = Light+Armored, Aerial Assault Carrier = Air+Armored, Phantom = Stealth+Armored…)
+- [~] **UnitSize footprints** — v4: size 1–5 counts toward the troop cap (no spawn space yet)
 - [ ] **Wave-defense garrisons** — unit buildings auto-train defenders up to MaxCap while a wave is incoming (original's `WaveDefenseUnitProduction`)
 - [ ] **Money Capacity** — production buildings store cash up to a cap (needed for Bank % income)
-- [ ] **Bank building** — income = 5% of stored cash
+- [x] **Bank building** — v4: 5% of cash every 60s (max $50k, max 3)
 - [ ] StructurePower = per-building power score (leaderboard/defense metric)
 
 ### Achievements
 (not in the uploaded data — design our own)
-- [ ] Checklist: first building, first capture, first boss kill, 100 kills, hold all 5 points, rebirth 1/3/5, power milestones
-- [ ] Toast on unlock + progress in the UI panel
+- [x] Checklist: first building, first capture, first boss kill, 100 kills, hold all 5 points, rebirth 1/3/5, power milestones
+- [x] Toast on unlock + progress in the UI panel
 
 ### Rewards
-- [ ] Extend rarity ladder: Common → Uncommon → Rare → Epic → Legendary → Mythic → **Limited → Unique → Rebirth** (skip Dev)
-- [ ] Crate drop pools include the new units/buildings (see UNITS / BUILDINGS below)
+- [x] Extend rarity ladder: Common → Uncommon → Rare → Epic → Legendary → Mythic → **Limited → Unique → Rebirth** (skip Dev)
+- [x] Crate drop pools include the new units/buildings (see UNITS / BUILDINGS below)
 - [ ] Kill rewards scale with unit power
 
 ### Boosts
-- [ ] Outpost points: each held point +10% production (original: 8 outposts; we have city +20% only)
-- [ ] Supply Depot: +10 troop cap (max 100)
-- [ ] Bank: % of stored cash (see Game)
-- [ ] Rebirth +10% each (already in)
+- [x] Outpost points: each held point +10% production (original: 8 outposts; we have city +20% only)
+- [x] Supply Depot: +10 troop cap (max 100)
+- [x] Bank: % of cash (see Game)
+- [x] Rebirth +10% each (already in)
 
 ### Units
-- [ ] P1 (cheap, high impact): Sniper, Commando, Rocket Trooper, Humvee, Ranger, APC, Huey, Mobile Flak, Mantis, TIGR, Drone, Swarm Drone
-- [ ] P2 (heavies): Light Tank, Heavy Tank, Railgun Tank, AC-130, B52, ICBM Launcher, Mammoth, Leopard 2A5, PZH 2000, Battleship, Carrier
-- [ ] P3 (specialists): F15/F22/F35/SU-47/KA-52/Cobra/Blackhawk, B2, Stealth Helicopter, Medic + Officer (support, 0 damage)
+- [x] P1 (cheap, high impact) — v4 has Sniper, Commando, Rocket, Humvee, Ranger, APC, Huey, Flak, Drone (+ Scout, ATV, Medic, Heavy Inf); still missing Mantis, TIGR, Swarm Drone —: Sniper, Commando, Rocket Trooper, Humvee, Ranger, APC, Huey, Mobile Flak, Mantis, TIGR, Drone, Swarm Drone
+- [~] P2 (heavies) — v4 has Heavy Tank, Railgun, AC-130, B52, Mammoth, Artillery; missing the rest —: Light Tank, Heavy Tank, Railgun Tank, AC-130, B52, ICBM Launcher, Mammoth, Leopard 2A5, PZH 2000, Battleship, Carrier
+- [~] P3 (specialists) — v4 has F22, Cobra, Blackhawk, A-10, B2, Stealth Heli, Medic —: F15/F22/F35/SU-47/KA-52/Cobra/Blackhawk, B2, Stealth Helicopter, Medic + Officer (support, 0 damage)
 - [ ] Naval line: Gunboat, Frigate, Battleship, Carrier, Submarine, Zumwalt, Speedboat
 
 ### Textures (sprites)
-- [ ] New 2.5D flat sprites for every new unit & building (same style as existing)
-- [ ] Map dressing from `ref-map-original.png`: trees, flowers, floating water crystals, city arena ring
-- [ ] Rarity colors for the 3 new tiers
+- [x] New 2.5D flat sprites for every new unit & building (same style as existing)
+- [x] Map dressing from `ref-map-original.png`: trees, flowers, floating water crystals, city arena ring
+- [x] Rarity colors for the 3 new tiers
 
 ### Buildings
-- [ ] Production ladder (full list in BUILDINGS below — add to the shop)
-- [ ] One unit building per new unit (depot / hangar / helipad / fortress naming)
-- [ ] Special: Supply Depot, Pentagon, Airship Docks, Submarine Cavern, Centurion Support Site
+- [~] Production ladder (v4: 12 of the list) (full list in BUILDINGS below — add to the shop)
+- [x] One unit building per new unit (depot / hangar / helipad / fortress naming)
+- [~] Special: Supply Depot ✔, Pentagon ✔ (AC-130), still missing:, Airship Docks, Submarine Cavern, Centurion Support Site
 
 ### Maps
-- [ ] Organic blobby coastlines fused around each square plot (see MAPS)
-- [ ] Trees/flowers on islands, point-islet white rings, floating water crystals
-- [ ] City center arena ring
+- [x] Organic blobby coastlines fused around each square plot (v4 radial map like the picture) (see MAPS)
+- [x] Trees on islands, floating water crystals
+- [x] City center (octagon + plaza)
 - [ ] Water lanes for ships once the naval line lands
 
 ---
