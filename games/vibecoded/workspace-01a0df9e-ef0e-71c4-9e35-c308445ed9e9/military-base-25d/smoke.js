@@ -1,74 +1,17 @@
-/* Headless smoke test: runs the real game.js against DOM/canvas stubs. */
+/* Headless smoke test: runs the real game (every js/*.js listed in index.html) against DOM/canvas stubs. */
 'use strict';
 const fs=require('fs');
 
-// ---- canvas 2d stub ----
-const ctxStub=new Proxy({},{
-  get(t,p){ if(p==='measureText') return ()=>({width:10}); return ()=>undefined; },
-  set(){ return true; },
-});
-function makeEl(id){
-  const el={
-    id, children:[], dataset:{}, style:{}, _cls:new Set(), _ls:{},
-    classList:{
-      add:c=>el._cls.add(c), remove:c=>el._cls.delete(c),
-      toggle:(c,f)=>{ if(f===undefined) f=!el._cls.has(c); f?el._cls.add(c):el._cls.delete(c); },
-      contains:c=>el._cls.has(c),
-    },
-    textContent:'', value:'', hidden:false, onclick:null, width:0, height:0,
-    appendChild(c){ el.children.push(c); return c; },
-    remove(){},
-    _qcache:{},
-    querySelector(sel){ if(!el._qcache[sel]) el._qcache[sel]=makeEl(el.id+'>'+sel); return el._qcache[sel]; },
-    querySelectorAll(){ return []; },
-    closest(){ return null; },
-    addEventListener(t,fn){ el._ls[t]=fn; },
-    getContext(){ return ctxStub; },
-    getBoundingClientRect(){ return {left:0,top:0}; },
-  };
-  let _html='';
-  Object.defineProperty(el,'innerHTML',{ get:()=>_html, set:v=>{_html=v; if(v==='') el.children.length=0;}});
-  return el;
-}
-const cache=new Map();
-const document={
-  querySelector(sel){ if(!cache.has(sel)) cache.set(sel,makeEl(sel)); return cache.get(sel); },
-  querySelectorAll(){ return []; },
-  createElement(t){ return makeEl('el_'+t); },
-  _ls:{},
-  addEventListener(t,fn){ document._ls[t]=fn; },
-};
-const window={
-  innerWidth:1280, innerHeight:800, devicePixelRatio:1, _ls:{},
-  addEventListener(t,fn){ (window._ls[t]=window._ls[t]||[]).push(fn); },
-};
-const store={};
-let rafCb=null, tick=1000;
-
-global.window=window; global.document=document;
-global.localStorage={ getItem:k=>store[k]??null, setItem:(k,v)=>store[k]=String(v), removeItem:k=>{delete store[k];} };
-global.requestAnimationFrame=cb=>{ rafCb=cb; };
-global.confirm=()=>false;
-global.location={reload(){}};
-
-// ---- load game ----
-require('/home/user/military-base-25d/game.js');
-const B=window.__BMB;
-if(!B) throw new Error('BMB hook missing');
+const T=require('./test-stubs.js');                 // stubs + loads the game exactly like index.html
+const {B,G,pump,store,document,window}=T;
 const S=()=>B.S;
+// map-derived coordinates (never hard-code: the map layout is computed in js/02-data-world.js)
+const PC=B.plotCentre(), MC=G('MAP_C'), BC=i=>G('botCenter')(i);
+const WEST=G('plotCenter')(B.MAP_PLOTS[6]);        // BOT 6 = WEST plot
+const ARENA={x:WEST.x-300,y:WEST.y-260};          // quiet corner of the WEST plot, away from its bridge
+const walkCell=(x,y)=>{ const [cx,cy]=B.cellOf(x,y); return B.WALK[cy*B.GW+cx]; };
 
-let frames=0;
 const rnd2=(a,b)=>a+Math.random()*(b-a);
-function pump(ms){
-  const n=Math.max(1,Math.round(ms/16.7));
-  for(let i=0;i<n;i++){
-    tick+=16.7;
-    const cb=rafCb; rafCb=null;
-    if(!cb) throw new Error('requestAnimationFrame chain broken');
-    cb(tick);
-    frames++;
-  }
-}
 function assert(cond,msg){
   if(!cond){ console.error('FAIL:',msg); process.exitCode=1; }
   else console.log('ok  -',msg);
@@ -78,11 +21,20 @@ function assert(cond,msg){
 pump(300);
 assert(S().units.length===0,`points start neutral — field is clear (${S().units.length} units)`);
 // map: islands + water
-assert(B.WALK[B.cellOf(1700,2850)[1]*B.GW+B.cellOf(1700,2850)[0]]===1,'player island is walkable');
-assert(B.WALK[B.cellOf(1700,1700)[1]*B.GW+B.cellOf(1700,1700)[0]]===1,'city island is walkable');
-assert(B.WALK[B.cellOf(1620,1000)[1]*B.GW+B.cellOf(1620,1000)[0]]===0,'open water is not walkable');
+assert(walkCell(PC.x,PC.y)===1,'player island is walkable');
+assert(walkCell(MC.x,MC.y)===1,'city island is walkable');
+assert(walkCell(300,300)===0,'open water is not walkable');
+// radial map like the original: 8 plots + 8 lobes + octagon city + 4 outpost islets + bridges + crystals in water
+assert(B.MAP_PLOTS.length===8 && B.LOBES.length===8,'8 plot islands, each with a lobe');
+assert(B.LOBES.every(L=>B.walkableAt(L.x,L.y)),'every lobe island is land');
+assert(B.POINTS_DEFS.filter(p=>!p.city).every(p=>B.walkableAt(p.x,p.y)),'4 outpost islets are land');
+assert(B.BRIDGES.filter(b=>b.spoke).length===8 && B.BRIDGES.length===16,'8 spoke bridges + 8 outpost bridges');
+assert(G('CRYSTALS').every(c=>!B.walkableAt(c.x,c.y)),'crystals float in the water');
+assert(B.BOT_DEFS.every((b,i)=>Math.abs(Math.hypot(BC(i).x-MC.x,BC(i).y-MC.y)-G('RING'))<2),'bot plots sit on the ring around the city');
+{ const mid={x:(PC.x+MC.x)/2,y:(PC.y+MC.y)/2}; assert(B.walkableAt(mid.x,mid.y) && !B.walkableAt(mid.x+120,mid.y),'spoke bridge is walkable, water beside it is not'); }
+for(const p of B.POINTS_DEFS.filter(p=>!p.city)){ const pp=B.astar(PC.x,PC.y,p.x,p.y); assert(!!pp,`A* reaches ${p.name} from your base`); }
 // A*: player base -> city stays on land/bridges
-const path=B.astar(1700,2850,1700,1700);
+const path=B.astar(PC.x,PC.y,MC.x,MC.y);
 assert(!!path,'A* found a path: player base -> CITY');
 if(path){
   let allW=true;
@@ -110,10 +62,11 @@ const boss=S().units.find(u=>u.boss);
 assert(!!boss,'boss spawned');
 if(boss){
   let pu=S().units.find(u=>u.side==='p');
-  if(!pu){ pu=B.mkUnit('rifle','p',1400,2600); S().units.push(pu); } // bot raiders may have killed early units
+  if(!pu){ pu=B.mkUnit('rifle','p',PC.x,PC.y); S().units.push(pu); } // bot raiders may have killed early units
+  pu.x=PC.x; pu.y=PC.y; pu.order={x:PC.x,y:PC.y}; pu.path=null;  // home plot: nobody else around to steal the kill
   boss.x=pu.x+60; boss.y=pu.y; pu.hp=pu.maxHp=99999; // deterministic kill race
-  boss.hp=5;
-  pump(4000);
+  boss.hp=1;
+  pump(2500);
 }
 assert(S().stats.bosses===1,'boss defeated, reward tracked');
 assert(S().inventory.some(i=>i.kind==='c'&&i.type==='premium'),'premium crate dropped in backpack');
@@ -188,7 +141,7 @@ assert(S().time>t1,'admin: 2x speed advances game time');
 S().admin.speed=1;
 // god mode
 S().admin.god=true;
-const gu=B.mkUnit('rifle','p',500,1700); S().units.push(gu);
+const gu=B.mkUnit('rifle','p',PC.x,PC.y); S().units.push(gu);
 const hpB=gu.hp;
 B.damageUnit(gu,{side:'e'},50);
 assert(gu.hp===hpB,'admin: god mode blocks damage to player units');
@@ -227,36 +180,36 @@ assert(S().units.some(u=>u.bot===0),'bot 1 trained units (barracks)');
 const trained=S().units.find(u=>u.bot===0);
 assert(trained&&trained.faction===1,'bot 1 troops carry its own faction (troop colors = team colors)');
 // bot offense dispatch: default = march on the CITY
-for(let k=0;k<4;k++) S().units.push(B.mkUnit('rifle','e',1400,300,{bot:0}));
+for(let k=0;k<4;k++) S().units.push(B.mkUnit('rifle','e',BC(0).x,BC(0).y,{bot:0}));
 S().bots[0].raidT=1;
 pump(2000);
-assert(S().units.some(u=>u.bot===0&&u.order&&u.order.point===2),'bot 1 dispatched troops to the CITY (the middle)');
+assert(S().units.some(u=>u.bot===0&&u.order&&u.order.point===B.CITY_IDX),'bot 1 dispatched troops to the CITY (the middle)');
 // ---- factions fight EACH OTHER (isolated arena: quiet SW island) ----
 S().nextWave=9999; S().nextBoss=9999; // freeze global spawners during bot section
 for(let i=0;i<7;i++) B.setBotPreset(i,'empty',true);
 S().units=[];
-const ua=B.mkUnit('rifle','e',300,2700,{faction:1}); ua.hp=10;
-const ub=B.mkUnit('rifle','e',310,2700,{faction:2});
+const ua=B.mkUnit('rifle','e',ARENA.x,ARENA.y,{faction:1}); ua.hp=10;
+const ub=B.mkUnit('rifle','e',ARENA.x+10,ARENA.y,{faction:2});
 S().units.push(ua,ub);
 pump(6000);
 assert(!S().units.some(u=>u.id===ua.id),'different factions attack each other (bot-vs-bot)');
 assert(S().units.some(u=>u.id===ub.id),'survivor of the faction fight is alive');
 // ---- armored type: damage mitigation ----
 S().units=[];
-const at=B.mkUnit('tank','e',350,2750,{faction:1});
-const ar2=B.mkUnit('rifle','e',360,2750,{faction:2});
+const at=B.mkUnit('tank','e',ARENA.x+50,ARENA.y+50,{faction:1});
+const ar2=B.mkUnit('rifle','e',ARENA.x+60,ARENA.y+50,{faction:2});
 S().units.push(at,ar2);
 pump(4000);
 const taken=at.maxHp-at.hp;
 assert(taken>0&&taken<8,`armored tank mitigates damage (took ${Math.round(taken)} vs raw ~16 in 4s)`);
 // ---- stealth type: needs detection ----
 S().units=[];
-const sp2=B.mkUnit('spectre','e',400,2700,{faction:1});
-const rf2=B.mkUnit('rifle','e',800,2700,{faction:2});  // 400px away: outside both ranges -> no fight yet
+const sp2=B.mkUnit('spectre','e',ARENA.x+100,ARENA.y,{faction:1});
+const rf2=B.mkUnit('rifle','e',ARENA.x+500,ARENA.y,{faction:2});  // 400px away: outside both ranges -> no fight yet
 S().units.push(sp2,rf2);
 pump(200);
 assert(B.canSee(rf2,sp2)===false,'stealth hidden from rifle (no detector, >70px)');
-const jt=B.mkUnit('jet','e',400,2850,{faction:2});      // 150px: inside jet's 340 sensor
+const jt=B.mkUnit('jet','e',ARENA.x+100,ARENA.y+150,{faction:2});      // 150px: inside jet's 340 sensor
 S().units.push(jt);
 pump(100);
 assert(B.canSee(jt,sp2)===true,'jet detects spectre (340px sensor)');
@@ -268,30 +221,30 @@ assert(!S().units.some(u=>u.id===sp2.id),'detected stealth spectre was found & d
 // ---- air flies over water; land must use the bridge ----
 S().units=[];
 for(const p of S().points){ p.owner='neutral'; p.faction=-1; p.cool=0; p.respawnT=8; } // no garrison interference
-const hx=350, hy=1750; // west edge of the WEST island, far from its road junction
+const hx=ARENA.x, hy=ARENA.y; // corner of the WEST island, off its bridge
 const heli=B.mkUnit('heli','e',hx,hy,{bot:5,faction:6});
-heli.order={point:2}; heli.cityGoal=false; // air flies straight
+heli.order={point:B.CITY_IDX}; heli.cityGoal=false; // air flies straight
 const land=B.mkUnit('rifle','e',hx+5,hy+5,{bot:5,faction:6});
-land.order={point:2}; land.cityGoal=true;   // land follows the bridge
+land.order={point:B.CITY_IDX}; land.cityGoal=true;   // land follows the bridge
 S().units.push(heli,land);
-for(let ss=0;ss<12;ss++){
+for(let ss=0;ss<18;ss++){
   pump(1000);
-  if(process.env.DBGAIR) console.log('  [air t'+(ss+1)+'] units='+S().units.length+' heli=('+Math.round(heli.x)+','+Math.round(heli.y)+') d='+Math.round(Math.hypot(heli.x-1900,heli.y-1900))+' other='+S().units.filter(u=>u!==heli&&u!==land).map(u=>u.type+':f'+u.faction+'@'+Math.round(u.x)+','+Math.round(u.y)).join(' | '));
+  if(process.env.DBGAIR) console.log('  [air t'+(ss+1)+'] units='+S().units.length+' heli=('+Math.round(heli.x)+','+Math.round(heli.y)+') d='+Math.round(Math.hypot(heli.x-MC.x,heli.y-MC.y))+' other='+S().units.filter(u=>u!==heli&&u!==land).map(u=>u.type+':f'+u.faction+'@'+Math.round(u.x)+','+Math.round(u.y)).join(' | '));
 }
-const heliD=Math.hypot(heli.x-1900,heli.y-1900);
-const landD=Math.hypot(land.x-1900,land.y-1900);
+const heliD=Math.hypot(heli.x-MC.x,heli.y-MC.y);
+const landD=Math.hypot(land.x-MC.x,land.y-MC.y);
 assert(heliD<200,`air unit flew straight over water to the city (dist ${Math.round(heliD)})`);
 assert(landD>250,`land unit still en route via bridge (dist ${Math.round(landD)})`);
 // ---- the war for the MIDDLE: bots converge on the CITY ----
 S().units=S().units.filter(u=>u.faction!==6);
 B.setBotPreset(0,'fortified',true);
 B.setBotPreset(1,'fortified',true);
-S().points[2].owner='neutral'; S().points[2].faction=-1; S().points[2].cool=0;
-for(let k=0;k<6;k++) S().units.push(B.mkUnit('rifle','e',1500+(k%2)*80,500+((k/2)|0)*60,{bot:0,faction:1}));
-for(let k=0;k<6;k++) S().units.push(B.mkUnit('rifle','e',2700-(k%2)*80,700+((k/2)|0)*60,{bot:1,faction:2}));
+{ const cp=S().points[B.CITY_IDX]; cp.owner='neutral'; cp.faction=-1; cp.cool=0; }
+for(let k=0;k<6;k++) S().units.push(B.mkUnit('rifle','e',BC(0).x+(k%2)*80,BC(0).y+((k/2)|0)*60,{bot:0,faction:1}));
+for(let k=0;k<6;k++) S().units.push(B.mkUnit('rifle','e',BC(1).x-(k%2)*80,BC(1).y+((k/2)|0)*60,{bot:1,faction:2}));
 S().bots[0].raidT=1; S().bots[1].raidT=3;
 pump(60*1000);
-const cf=B.pointFaction(S().points[2]);
+const cf=B.pointFaction(S().points[B.CITY_IDX]);
 assert(cf>=0,`the middle is contested — CITY now held by ${cf<0?'?':(cf===0?'YOU':B.facN(cf))}`);
 
 // destroy bot 1 base entirely -> down -> rebuilds
@@ -312,5 +265,75 @@ assert(S().bots[2].down===false,'empty preset does NOT trigger rebuild');
 B.setBotPreset(2,'village');
 assert(B.botBuildings(2).length>0,'preset restored on request');
 
-console.log(`\n${frames} frames simulated. ${process.exitCode?'SMOKE TEST FAILED':'ALL SMOKE TESTS PASSED'}`);
+// ---- v4: unit roster, classes & damage modifiers ----
+const UNITS=G('UNITS'), BUILD=G('BUILD');
+const byCls=c=>Object.values(UNITS).filter(u=>u.cls.includes(c)).length;
+assert(byCls('light')>=10 && byCls('armored')>=10 && byCls('air')>=10 && byCls('stealth')>=5,`roster: ${byCls('light')} light / ${byCls('armored')} armored / ${byCls('air')} air / ${byCls('stealth')} stealth`);
+assert(Object.keys(UNITS).every(k=>Object.values(BUILD).some(b=>b.unit===k)),'every unit has a building that trains it');
+assert(Object.keys(BUILD).every(k=>G('SPR')[k]) && Object.keys(UNITS).every(k=>G('SPR')[k]),'every building + unit has a sprite');
+{ let ok=true; const g=G('ctx'); for(const k of [...Object.keys(BUILD),...Object.keys(UNITS)]){ try{ G('SPR')[k].draw(g,1.3,{side:'e',faction:3}); }catch(e){ ok=false; console.error('  sprite',k,e.message); } } assert(ok,'all sprites draw without errors'); }
+{ let ok=true; for(const k of Object.keys(BUILD)){ try{ G('tipHTML')(k); }catch(e){ ok=false; console.error('  tip',k,e.message);} } assert(ok,'stat tooltip renders for every building'); }
+const mk=(t,f,x=ARENA.x,y=ARENA.y)=>B.mkUnit(t,'e',x,y,{faction:f});
+assert(B.modFor(mk('flak',1),mk('tank',2))===0,'Mobile Flak cannot hurt armored (×0)');
+assert(B.modFor(mk('flak',1),mk('heli',2))===1.5,'Mobile Flak ×1.5 vs air');
+assert(B.modFor(mk('rifle',1),mk('spectre',2))===0,'Rifleman cannot hurt stealth (×0)');
+assert(B.modFor(mk('rocket',1),mk('tank',2))===1.5,'Rocket Trooper ×1.5 vs armored');
+assert(B.modFor(mk('sniper',1),mk('phantom',2))===0,'multi-class target: any ×0 class wins (sniper vs Phantom)');
+assert(B.isAir(mk('drone',1)) && !UNITS.drone.cls.includes('air') && B.modFor(mk('flak',1),mk('drone',2))===0,'Drone flies but stays LIGHT (anti-air ignores it)');
+// flak ignores a tank standing next to it (never targets ×0)
+S().units=[]; S().buildings=S().buildings.filter(b=>b.owner!=='p');
+{ const fl=mk('flak',1), tk=mk('tank',2,ARENA.x+80); tk.hp=tk.maxHp=99999; S().units.push(fl,tk); pump(3000);
+  assert(tk.hp===tk.maxHp,'Flak never shoots a tank (×0 → no target)'); }
+// splash: artillery hits the whole clump
+S().units=[];
+{ const ar=mk('arty',1); const cl=[0,1,2].map(i=>{ const r=mk('rifle',2,ARENA.x+300+i*12,ARENA.y); r.hp=r.maxHp=200; return r; }); S().units.push(ar,...cl);
+  pump(1200); assert(cl.filter(r=>r.hp<200).length>=2,'artillery splash damages several units'); }
+// medic heals
+S().units=[];
+{ const md=mk('medic',1), hurt=mk('rifle',1,ARENA.x+40); hurt.hp=5; S().units.push(md,hurt); pump(3000);
+  assert(hurt.hp>5,`medic heals allies (5 → ${Math.round(hurt.hp)})`); }
+// troop cap counts unit SIZE
+S().units=[];
+S().units.push(B.mkUnit('mammoth','p',PC.x,PC.y), B.mkUnit('rifle','p',PC.x,PC.y));
+assert(B.capUsed()===6,`troop cap uses unit size (mammoth 5 + rifle 1 = ${B.capUsed()})`);
+// ---- turrets, radar, hospital, bank ----
+S().units=[]; S().buildings=S().buildings.filter(b=>b.owner!=='p');
+B.placeBuilding('pillbox',6,4);
+const pbx=S().buildings[S().buildings.length-1]; B.bPos(pbx);
+{ const foe=mk('rifle',3,pbx.x+120,pbx.y); foe.hp=foe.maxHp=500; S().units.push(foe); pump(3000);
+  assert(foe.hp<500,'Pillbox shoots ground enemies in range'); }
+B.placeBuilding('aaturret',8,4);
+{ const sam=S().buildings[S().buildings.length-1]; B.bPos(sam); S().units=[];
+  const gr=mk('rifle',3,sam.x+60,sam.y); gr.hp=gr.maxHp=500; const ai=mk('heli',3,sam.x+100,sam.y); ai.hp=ai.maxHp=5000; ai.order={x:ai.x,y:ai.y};
+  S().buildings=S().buildings.filter(b=>b.type!=='pillbox'); S().units.push(gr,ai); pump(3000);
+  assert(ai.hp<5000 && gr.hp===500,'SAM Site hits air only'); }
+B.placeBuilding('radar',10,4);
+{ const rd=S().buildings[S().buildings.length-1]; B.bPos(rd); S().units=[];
+  const sp=B.mkUnit('spectre','e',rd.x+300,rd.y,{faction:3}); const me=B.mkUnit('rifle','p',rd.x-200,rd.y);
+  S().units.push(sp,me); pump(500);
+  assert(B.canSee(me,sp),'Radar Station reveals stealth for your whole army'); }
+B.placeBuilding('hospital',1,6);
+{ const hs=S().buildings[S().buildings.length-1]; B.bPos(hs); S().units=[];
+  const w=B.mkUnit('tank','p',hs.x+50,hs.y); w.hp=10; S().units.push(w); pump(2200);
+  assert(w.hp>=20,'Field Hospital heals nearby units'); }
+S().units=[];
+S().cash=100000; B.placeBuilding('bank',3,7); S().bankT=0.01; const c0=S().cash; B.bankTick(0.02);
+assert(S().cash-c0>=4999,`Bank pays 5% interest (+${Math.round(S().cash-c0)})`);
+// ---- shop rules ----
+const rbSave=S().rebirth; S().rebirth=0;
+assert(!!B.buyBlock('monument'),'Monument needs a rebirth');
+S().rebirth=1; assert(!B.buyBlock('monument'),'Monument unlocked after rebirth'); S().rebirth=rbSave;
+B.setBotPreset(0,'standard',true);
+assert(B.canPlaceAt('solar',1,1)||S().buildings.some(b=>b.owner==='p'&&b.gx<=1&&b.gy<=1),'bot buildings never block YOUR grid');
+// ---- achievements + leaderboard + UI panels ----
+S().achievements={}; B.checkAchievements();
+assert(S().achievements.build1!=null,'achievement "Groundbreaker" unlocked');
+{ let ok=true; try{ G('renderAchievements')(); G('renderLeaderboard')(); S().shopTab='units'; for(const c of ['light','armored','air','stealth']){ S().shopSub=c; G('renderShop')(); } S().shopTab='production'; }catch(e){ ok=false; console.error(e); }
+  assert(ok,'achievements, leaderboard and UNITS sub-tabs render'); }
+// ---- save import accepts v3 + v4 ----
+{ const box=document.querySelector('#aSave'); box.value=JSON.stringify({...JSON.parse(store['bmb25']||'{}'),v:3}); store['bmb25']=null;
+  window.Admin.importSave(); assert(JSON.parse(store['bmb25']||'{}').v===3,'admin import accepts a v3 save'); }
+assert(G('load')().v===4,'v3 save migrates to v4 on load');
+
+console.log(`\n${T.frames} frames simulated. ${process.exitCode?'SMOKE TEST FAILED':'ALL SMOKE TESTS PASSED'}`);
 process.exit(process.exitCode||0);

@@ -19,6 +19,8 @@
 <div id="rail">
   <button class="rail-btn" data-panel="backpack"><span class="r-ico">🎒</span><span class="r-lbl">BACKPACK</span></button>
   <button class="rail-btn" data-panel="rewards"><span class="r-ico">🎁</span><span class="r-lbl">REWARDS</span></button>
+  <button class="rail-btn" data-panel="achieve"><span class="r-ico">🏆</span><span class="r-lbl">TROPHIES</span><span class="badge" id="achBadge" hidden>0</span></button>
+  <button class="rail-btn" data-panel="leader"><span class="r-ico">📊</span><span class="r-lbl">RANKS</span></button>
   <button class="rail-btn" data-panel="robux"><span class="r-ico">💎</span><span class="r-lbl">ROBUX SHOP</span></button>
   <button class="rail-btn" data-panel="rebirth" id="railRebirth"><span class="r-ico">🔥</span><span class="r-lbl">REBIRTH</span><span class="badge" id="rbBadge" hidden>!</span></button>
   <button class="rail-btn" data-panel="settings"><span class="r-ico">⚙️</span><span class="r-lbl">SETTINGS</span></button>
@@ -48,7 +50,7 @@
 <div id="hint">WASD move • wheel zoom • drag = select • Ctrl+click = move units • RMB = cancel • F1 = ADMIN</div>
 
 <!-- minimap -->
-<div id="minibox"><canvas id="mini" width="150" height="112"></canvas></div>
+<div id="minibox"><canvas id="mini" width="150" height="150"></canvas></div>
 <button id="btnAdmin" title="Admin panel (F1 or `)">🛠 ADMIN</button>
 
 <!-- ============ ADMIN DRAWER ============ -->
@@ -142,6 +144,8 @@
       <button class="abtn" onclick="Admin.go('west')">W</button>
       <button class="abtn" onclick="Admin.go('nw')">NW</button>
       <button class="abtn" onclick="Admin.go('ne')">NE</button>
+      <button class="abtn" onclick="Admin.go('se')">SE</button>
+      <button class="abtn" onclick="Admin.go('sw')">SW</button>
       <button class="abtn" onclick="Admin.go('boss')">BOSS</button>
     </div>
 
@@ -158,6 +162,9 @@
   </div>
 </div>
 
+<!-- hover stat tooltip (shop cards) -->
+<div id="tip" hidden></div>
+
 <!-- toasts -->
 <div id="toasts"></div>
 
@@ -171,6 +178,7 @@
       <button data-tab="special">SPECIAL</button>
       <button data-tab="decor">DECOR</button>
     </div>
+    <div class="tabs sub" id="shopSubs" hidden></div>
     <div class="grid" id="shopGrid"></div>
   </div>
 </div>
@@ -186,6 +194,16 @@
 <div class="panel" id="p-rewards">
   <div class="p-head"><span class="p-title">REWARDS</span><button class="x" data-close>✕</button></div>
   <div class="p-body"><div class="rw-list" id="rwList"></div></div>
+</div>
+
+<div class="panel" id="p-achieve">
+  <div class="p-head"><span class="p-title">🏆 ACHIEVEMENTS</span><button class="x" data-close>✕</button></div>
+  <div class="p-body"><p class="p-note" id="achSummary"></p><div class="rw-list" id="achList"></div></div>
+</div>
+
+<div class="panel" id="p-leader">
+  <div class="p-head"><span class="p-title">📊 LEADERBOARD</span><button class="x" data-close>✕</button></div>
+  <div class="p-body"><p class="p-note">All 8 factions ranked by military power (buildings + army). Points held shown as flags.</p><div class="lb-list" id="lbList"></div></div>
 </div>
 
 <div class="panel" id="p-robux">
@@ -242,6 +260,30 @@
   </div>
 </div>
 
-<script src="game.js"></script>
+<!-- game code: loaded in order; smoke.js + gen_info.py read this list -->
+<script src="js/01-helpers.js"></script>
+<script src="js/02-data-world.js"></script>
+<script src="js/02b-data-units.js"></script>
+<script src="js/02c-data-buildings.js"></script>
+<script src="js/02d-data-economy.js"></script>
+<script src="js/03-state.js"></script>
+<script src="js/04-factions.js"></script>
+<script src="js/05-map.js"></script>
+<script src="js/06-save.js"></script>
+<script src="js/07-audio.js"></script>
+<script src="js/08-sprites.js"></script>
+<script src="js/08b-sprites-units.js"></script>
+<script src="js/08c-sprites-buildings.js"></script>
+<script src="js/09-camera.js"></script>
+<script src="js/10-fx.js"></script>
+<script src="js/11-economy.js"></script>
+<script src="js/12-units.js"></script>
+<script src="js/13-render.js"></script>
+<script src="js/14-ui.js"></script>
+<script src="js/15-input.js"></script>
+<script src="js/16-tutorial.js"></script>
+<script src="js/17-loop.js"></script>
+<script src="js/18-admin.js"></script>
+<script src="js/19-init.js"></script>
 </body>
 </html>
