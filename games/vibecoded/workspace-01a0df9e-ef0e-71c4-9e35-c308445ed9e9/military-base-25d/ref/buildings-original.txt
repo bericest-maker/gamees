@@ -1,0 +1,154 @@
+Vehicle Depot: Rarity="Legendary",BuildingCategory="Units",StructurePower=10000,RequiredPower=50000,UnitProduction={Heavy Tank={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Heavy Tank={MaxCap=2}}
+Barracks: Rarity="Common",BuildingCategory="Units",StructurePower=300,RequiredPower=0,UnitProduction={Light Infantry={Cycle=10,SpawnAmount=1}},WaveDefenseUnitProduction={Light Infantry={MaxCap=2,Cycle=12}}
+Drone Center: Rarity="Legendary",BuildingCategory="Units",StructurePower=15000,RequiredPower=75000,UnitProduction={Drone={Cycle=15,SpawnRadius=5,SpawnAmount=5}},WaveDefenseUnitProduction={Drone={MaxCap=20}}
+Oil Drill: Rarity="Epic",BuildingCategory="Production",StructurePower=2250,RequiredPower=30000,ResourceProduction={Money={Capacity=50000,Cycle=10,Income=1350}}
+Research Lab: Rarity="Legendary",BuildingCategory="Production",StructurePower=22500,RequiredPower=100000,ResourceProduction={Money={Capacity=1000000,Cycle=10,Income=9500}}
+Power Plant: Rarity="Rare",BuildingCategory="Production",StructurePower=1000,RequiredPower=1250,ResourceProduction={Money={Capacity=50000,Cycle=10,Income=650}}
+Radar Complex: Rarity="Epic",BuildingCategory="Production",StructurePower=2000,RequiredPower=20000,ResourceProduction={Money={Capacity=250000,Cycle=10,Income=1250}}
+Solar Array: Rarity="Common",BuildingCategory="Production",StructurePower=150,RequiredPower=0,ResourceProduction={Money={Capacity=2500,Cycle=5,Income=50}}
+Refinery: Rarity="Rare",BuildingCategory="Production",StructurePower=750,RequiredPower=1000,ResourceProduction={Money={Capacity=25000,Cycle=10,Income=400}}
+Space Elevator: Rarity="Dev",BuildingCategory="Special",StructurePower=0,RequiredPower=0,UnitProduction={Artemis={Cycle=1,MaxUnits=1,SpawnAmount=1}}
+Heavy Infantry Building: Rarity="Uncommon",BuildingCategory="Units",StructurePower=350,RequiredPower=250,UnitProduction={Heavy Infantry={Cycle=12,SpawnAmount=1}},WaveDefenseUnitProduction={Heavy Infantry={MaxCap=5}}
+Advanced Solar Array: Rarity="Uncommon",BuildingCategory="Production",StructurePower=400,RequiredPower=0,ResourceProduction={Money={Capacity=10000,Cycle=10,Income=200}}
+Test Mutation Vehicle Depot: Rarity="Dev",BuildingCategory="Units",StructurePower=100,RequiredPower=0,ResourceProduction={Money={Capacity=1000000,Cycle=60,Income=100}},UnitProduction={Light Tank={Cycle=2,SpawnAmount=1}},WaveDefenseUnitProduction={Light Tank={MaxCap=30}}
+Special Forces Compound: Rarity="Rare",BuildingCategory="Units",StructurePower=1000,RequiredPower=1000,UnitProduction={Commando={Cycle=10,SpawnAmount=1}},WaveDefenseUnitProduction={Commando={MaxCap=6}}
+Humvee Plant: Rarity="Rare",BuildingCategory="Units",StructurePower=1750,RequiredPower=2000,UnitProduction={Humvee={Cycle=15,SpawnAmount=1}},WaveDefenseUnitProduction={Humvee={MaxCap=4}}
+Sniper's Nest: Rarity="Uncommon",BuildingCategory="Units",StructurePower=750,RequiredPower=500,UnitProduction={Sniper={Cycle=18,SpawnAmount=1}},WaveDefenseUnitProduction={Sniper={MaxCap=4}}
+Munitions Depot: Rarity="Rare",BuildingCategory="Units",StructurePower=2000,RequiredPower=2500,UnitProduction={Rocket Trooper={Cycle=15,SpawnAmount=1}},WaveDefenseUnitProduction={Rocket Trooper={MaxCap=4}}
+Light Tank Factory: Rarity="Epic",BuildingCategory="Units",StructurePower=3000,RequiredPower=30000,UnitProduction={Light Tank={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Light Tank={MaxCap=2}}
+Experimental Gantry: Rarity="Legendary",BuildingCategory="Units",StructurePower=50000,RequiredPower=250000,UnitProduction={Experimental Unit={Cycle=60,SpawnAmount=1}},WaveDefenseUnitProduction={Experimental Unit={MaxCap=1}}
+Headquarters: Rarity="Mythic",BuildingCategory="Production",StructurePower=0,RequiredPower=35000,ResourceProduction={Money={Capacity=5000000,Cycle=10,Income=35000}}
+Wind Turbine: Rarity="Common",BuildingCategory="Production",StructurePower=75,RequiredPower=0,ResourceProduction={Money={Capacity=25000,Cycle=10,Income=100}}
+Supply Depot: Rarity="Rare",BuildingCategory="Special",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=100000,Cycle=10,Income=250}}
+Pentagon: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={AC-130={Cycle=55,SpawnAmount=1}},WaveDefenseUnitProduction={AC-130={MaxCap=2}}
+Steel Factory: Rarity="Uncommon",BuildingCategory="Production",StructurePower=250,RequiredPower=100,ResourceProduction={Money={Capacity=15000,Cycle=10,Income=300}}
+Golden Advanced Solar Array: Rarity="Epic",BuildingCategory="Production",StructurePower=5000,RequiredPower=0,ResourceProduction={Money={Capacity=100000,Cycle=10,Income=300}}
+Golden Wind Turbine: Rarity="Legendary",BuildingCategory="Production",StructurePower=12000,RequiredPower=0,ResourceProduction={Money={Capacity=25000,Cycle=10,Income=100}}
+Iron Mines: Rarity="Common",BuildingCategory="Production",StructurePower=50,RequiredPower=0,ResourceProduction={Money={Capacity=10000,Cycle=10,Income=125}}
+Bank: Rarity="Legendary",BuildingCategory="Production",StructurePower=0,RequiredPower=0,ResourceProduction={Money={CapacityMinutes=10,Cycle=10,Minimum=1000,IncomePercent=0.05,MinimumCapacity=50000}}
+Hydroponics Facility: Rarity="Uncommon",BuildingCategory="Production",StructurePower=100,RequiredPower=0,ResourceProduction={Money={Capacity=12500,Cycle=10,Income=150}}
+Golden Bank: Rarity="Mythic",BuildingCategory="Production",StructurePower=0,RequiredPower=0,ResourceProduction={Money={CapacityMinutes=10,Cycle=10,Minimum=5000,IncomePercent=0.05,MinimumCapacity=100000}}
+Apache Helipad: Rarity="Rebirth",BuildingCategory="Units",StructurePower=5000,RequiredPower=100000,UnitProduction={Apache={Cycle=20,SpawnAmount=1}},WaveDefenseUnitProduction={Apache={MaxCap=3}}
+Cobra Helipad: Rarity="Mythic",BuildingCategory="Units",StructurePower=10000,RequiredPower=50000,UnitProduction={Cobra={Cycle=40,SpawnRadius=5,SpawnAmount=2}},WaveDefenseUnitProduction={Cobra={MaxCap=3}}
+Statue of Freedom: Rarity="Rebirth",BuildingCategory="Production",StructurePower=25000,RequiredPower=250000,ResourceProduction={Money={Capacity=5000000,Cycle=10,Income=55000}}
+Monument: Rarity="Rebirth",BuildingCategory="Production",StructurePower=2500,RequiredPower=0,ResourceProduction={Money={Capacity=1000000,Cycle=10,Income=10000}}
+Clocktower: Rarity="Rebirth",BuildingCategory="Production",StructurePower=15000,RequiredPower=150000,ResourceProduction={Money={Capacity=1500000,Cycle=10,Income=40000}}
+Capitol Building: Rarity="Rebirth",BuildingCategory="Production",StructurePower=25000,RequiredPower=500000,ResourceProduction={Money={Capacity=10000000,Cycle=10,Income=80000}}
+Executive Residence: Rarity="Rebirth",BuildingCategory="Production",StructurePower=25000,RequiredPower=500000,ResourceProduction={Money={Capacity=10000000,Cycle=10,Income=80000}}
+Jet Hangar: Rarity="Legendary",BuildingCategory="Units",StructurePower=15000,RequiredPower=60000,UnitProduction={F15={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={F15={MaxCap=2}}
+Industrial Drill: Rarity="Legendary",BuildingCategory="Production",StructurePower=15000,RequiredPower=150000,ResourceProduction={Money={Capacity=1000000,Cycle=10,Income=7000}}
+Mechanized Armory: Rarity="Epic",BuildingCategory="Units",StructurePower=2000,RequiredPower=25000,UnitProduction={APC={Cycle=25,SpawnAmount=1}},WaveDefenseUnitProduction={APC={MaxCap=3}}
+Fusion Reactor: Rarity="Limited",BuildingCategory="Production",StructurePower=30000,RequiredPower=250000,ResourceProduction={Money={Capacity=20000000,Cycle=10,Income=88000}}
+ATC Tower: Rarity="Mythic",BuildingCategory="Units",StructurePower=30000,RequiredPower=100000,UnitProduction={A10 Warthog={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={A10 Warthog={MaxCap=2}}
+Storage Facility: Rarity="Epic",BuildingCategory="Production",StructurePower=1000,RequiredPower=15000,ResourceProduction={Money={Capacity=75000,Cycle=10,Income=1200}}
+Central Office: Rarity="Rebirth",BuildingCategory="Production",StructurePower=20000,RequiredPower=1000000,ResourceProduction={Money={Capacity=10000000,Cycle=10,Income=100000}}
+Secret Weapons Facility: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Railgun Tank={Cycle=60,SpawnAmount=1}},WaveDefenseUnitProduction={Railgun Tank={MaxCap=1}}
+Air Defense Compound: Rarity="Legendary",BuildingCategory="Units",StructurePower=10000,RequiredPower=30000,UnitProduction={Anti-Air Vehicle={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Anti-Air Vehicle={MaxCap=2}}
+Eiffel Tower: Rarity="Rebirth",BuildingCategory="Production",StructurePower=20000,RequiredPower=200000,ResourceProduction={Money={Capacity=2000000,Cycle=10,Income=45000}}
+Strategic Command Center: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={B52={Cycle=60,SpawnAmount=1}},WaveDefenseUnitProduction={B52={MaxCap=1}}
+ProPyramids: Rarity="Mythic",BuildingCategory="Production",StructurePower=30000,RequiredPower=450000,ResourceProduction={Money={Capacity=50000000,Cycle=10,Income=110000}}
+LARGE ProPyramids: Rarity="Dev",BuildingCategory="Production",StructurePower=30000,RequiredPower=250000,ResourceProduction={Money={Capacity=200000000,Cycle=10,Income=6000000}}
+Corporate Campus: Rarity="Mythic",BuildingCategory="Production",StructurePower=10000,RequiredPower=250000,ResourceProduction={Money={Capacity=3500000,Cycle=10,Income=65000}}
+Observation Tower: Rarity="Rebirth",BuildingCategory="Production",StructurePower=25000,RequiredPower=750000,ResourceProduction={Money={Capacity=3000000,Cycle=10,Income=80000}}
+Aegis Security Post: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Exotrooper={Cycle=60,SpawnRadius=5,SpawnAmount=2}},WaveDefenseUnitProduction={Exotrooper={MaxCap=2}}
+Balloon Cart: Rarity="Mythic",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Party Wagon={Cycle=10,SpawnAmount=1}},WaveDefenseUnitProduction={Party Wagon={MaxCap=6}}
+Scout Watchtower: Rarity="Common",BuildingCategory="Units",StructurePower=200,RequiredPower=0,UnitProduction={Scout={Cycle=8,SpawnAmount=1}},WaveDefenseUnitProduction={Scout={MaxCap=4}}
+Behemoth Fortress: Rarity="Mythic",BuildingCategory="Units",StructurePower=5000,RequiredPower=150000,UnitProduction={Behemoth={Cycle=60,SpawnAmount=1}},WaveDefenseUnitProduction={Behemoth={MaxCap=1}}
+Skyport: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Hornet={Cycle=60,SpawnRadius=5,SpawnAmount=2}},WaveDefenseUnitProduction={Hornet={MaxCap=2}}
+Particle Accelerator: Rarity="Legendary",BuildingCategory="Production",StructurePower=5000,RequiredPower=180000,ResourceProduction={Money={Capacity=1500000,Cycle=10,Income=17000}}
+Materials Research Wing: Rarity="Legendary",BuildingCategory="Production",StructurePower=10000,RequiredPower=200000,ResourceProduction={Money={Capacity=1500000,Cycle=10,Income=25000}}
+ATV Tent: Rarity="Uncommon",BuildingCategory="Units",StructurePower=500,RequiredPower=0,UnitProduction={ATV={Cycle=15,SpawnAmount=1}},WaveDefenseUnitProduction={ATV={MaxCap=4}}
+Derelict Factory: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Precursor={Cycle=60,SpawnAmount=1}},WaveDefenseUnitProduction={Precursor={MaxCap=1}}
+Huey Helipad: Rarity="Epic",BuildingCategory="Units",StructurePower=2000,RequiredPower=20000,UnitProduction={Huey={Cycle=20,SpawnAmount=1}},WaveDefenseUnitProduction={Huey={MaxCap=2,Cycle=30}}
+Farm: Rarity="Dev",BuildingCategory="Production",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=999999999,Cycle=10,Income=1}},UnitProduction={Chonk={Cycle=60,SpawnAmount=1}}
+LARGE Farm: Rarity="Dev",BuildingCategory="Production",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=999999999,Cycle=10,Income=1}},UnitProduction={Large Chonk={Cycle=60,MaxUnits=1,SpawnAmount=1}}
+Sentinel Response Center: Rarity="Legendary",BuildingCategory="Units",StructurePower=20000,RequiredPower=70000,UnitProduction={Viper={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Viper={MaxCap=2}}
+Sentinel Operations Building: Rarity="Mythic",BuildingCategory="Units",StructurePower=30000,RequiredPower=250000,UnitProduction={Operative={Cycle=60,SpawnRadius=3,SpawnAmount=3}},WaveDefenseUnitProduction={Operative={MaxCap=3}}
+Sentinel Barracks: Rarity="Legendary",BuildingCategory="Units",StructurePower=25000,RequiredPower=100000,UnitProduction={Juggernaut={Cycle=60,SpawnRadius=5,SpawnAmount=2}},WaveDefenseUnitProduction={Juggernaut={MaxCap=2}}
+Sentinel Munitions Assembly: Rarity="Legendary",BuildingCategory="Units",StructurePower=25000,RequiredPower=150000,UnitProduction={Mantis={Cycle=45,SpawnAmount=1}},WaveDefenseUnitProduction={Mantis={MaxCap=2}}
+Sentinel Listening Post: Rarity="Epic",BuildingCategory="Units",StructurePower=1000,RequiredPower=25000,UnitProduction={Mobile Flak={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Mobile Flak={MaxCap=2}}
+Orbital Outpost: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Leviathan={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Leviathan={MaxCap=1}}
+Data Center: Rarity="Mythic",BuildingCategory="Production",StructurePower=10000,RequiredPower=250000,ResourceProduction={Money={Capacity=10000000,Cycle=10,Income=60000}}
+Wing Command: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={F22={Cycle=30,SpawnRadius=3,SpawnAmount=3}},WaveDefenseUnitProduction={F22={MaxCap=6}}
+Providence Station: Rarity="Dev",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Providence={Cycle=120,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Providence={MaxCap=1}}
+Field Tent: Rarity="Mythic",BuildingCategory="Units",StructurePower=30000,RequiredPower=250000,UnitProduction={UAV={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={UAV={MaxCap=1}}
+Valkyrie Nexus: Rarity="Mythic",BuildingCategory="Units",StructurePower=10000,RequiredPower=75000,UnitProduction={Valkyrie={Cycle=35,SpawnAmount=1}},WaveDefenseUnitProduction={Valkyrie={MaxCap=2}}
+Missile Foundry: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={ICBM Launcher={Cycle=30,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={ICBM Launcher={MaxCap=2}}
+Titanic Shipyard: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Flagship={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Flagship={MaxCap=1}}
+Aircraft Supply Depot: Rarity="Epic",BuildingCategory="Special",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=100000,Cycle=10,Income=250}}
+Naval Supply Depot: Rarity="Epic",BuildingCategory="Special",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=100000,Cycle=10,Income=250}}
+Offshore Research Platform: Rarity="Legendary",BuildingCategory="Production",StructurePower=15000,RequiredPower=150000,ResourceProduction={Money={Capacity=1000000,Cycle=10,Income=12000}}
+Offshore Oil Rig: Rarity="Epic",BuildingCategory="Production",StructurePower=5000,RequiredPower=50000,ResourceProduction={Money={Capacity=1000000,Cycle=10,Income=7000}}
+Patrol Office: Rarity="Rare",BuildingCategory="Units",StructurePower=2000,RequiredPower=15000,UnitProduction={Gunboat={Cycle=15,SpawnAmount=1}},WaveDefenseUnitProduction={Gunboat={MaxCap=3}}
+Naval Shipyard: Rarity="Mythic",BuildingCategory="Units",StructurePower=7500,RequiredPower=150000,UnitProduction={Battleship={Cycle=45,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Battleship={MaxCap=2}}
+Ocean Terminal: Rarity="Epic",BuildingCategory="Units",StructurePower=3000,RequiredPower=35000,UnitProduction={Frigate={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Frigate={MaxCap=2}}
+Fleet Command: Rarity="Mythic",BuildingCategory="Units",StructurePower=7500,RequiredPower=150000,UnitProduction={Carrier={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Carrier={MaxCap=1}}
+Naval Beacon: Rarity="Mythic",BuildingCategory="Production",StructurePower=35000,RequiredPower=500000,ResourceProduction={Money={Capacity=10000000,Cycle=10,Income=57000}}
+Gas Storage Tank: Rarity="Rare",BuildingCategory="Production",StructurePower=750,RequiredPower=1000,ResourceProduction={Money={Capacity=25000,Cycle=10,Income=650}}
+Joint Strike Facility: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={F35={Cycle=60,SpawnRadius=3,SpawnAmount=5}},WaveDefenseUnitProduction={F35={MaxCap=5}}
+Mechanical Hive: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Drone Carrier={Cycle=45,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Drone Carrier={MaxCap=2}}
+Global Command Post: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Colossus={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Colossus={MaxCap=1}}
+Semiconductor Plant: Rarity="Mythic",BuildingCategory="Production",StructurePower=10000,RequiredPower=250000,ResourceProduction={Money={Capacity=5000000,Cycle=10,Income=25000}}
+Conglomerate Skyscraper: Rarity="Mythic",BuildingCategory="Units",StructurePower=0,RequiredPower=100000,UnitProduction={Spectre={Cycle=45,SpawnAmount=1}},WaveDefenseUnitProduction={Spectre={MaxCap=3}}
+Artillery Factory: Rarity="Legendary",BuildingCategory="Units",StructurePower=10000,RequiredPower=35000,UnitProduction={Artillery Truck={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Artillery Truck={MaxCap=2}}
+Tank Warehouse: Rarity="Mythic",BuildingCategory="Units",StructurePower=7000,RequiredPower=100000,UnitProduction={M1 Abrams={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={M1 Abrams={MaxCap=2}}
+Hospital: Rarity="Epic",BuildingCategory="Units",StructurePower=5000,RequiredPower=80000,UnitProduction={Medic={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Medic={MaxCap=2}}
+Armament Forge: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Assault Suit={Cycle=40,SpawnAmount=1}},WaveDefenseUnitProduction={Assault Suit={MaxCap=3}}
+Officer Quarters: Rarity="Mythic",BuildingCategory="Units",StructurePower=10000,RequiredPower=150000,UnitProduction={Officer={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Officer={MaxCap=1}}
+Railgun Armory: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Specialist={Cycle=30,MaxUnits=2,SpawnAmount=2}},WaveDefenseUnitProduction={Specialist={MaxCap=4}}
+Mech Gantry: Rarity="Mythic",BuildingCategory="Units",StructurePower=0,RequiredPower=100000,UnitProduction={Mini-Mecha={Cycle=30,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Mini-Mecha={MaxCap=2}}
+Skyscraper: Rarity="Legendary",BuildingCategory="Production",StructurePower=4000,RequiredPower=100000,ResourceProduction={Money={Capacity=10000000,Cycle=10,Income=14500}}
+Test Unit Building: Rarity="Dev",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Studio Cube={Cycle=3,SpawnAmount=1}},WaveDefenseUnitProduction={Flametrooper={MaxCap=20}}
+Stealth Hangar: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={B2={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={B2={MaxCap=1}}
+Desert Bastion: Rarity="Mythic",BuildingCategory="Units",StructurePower=30000,RequiredPower=250000,UnitProduction={Wasp={SpawnRadius=3,Cycle=30,MaxUnits=3,SpawnAmount=3}},WaveDefenseUnitProduction={Wasp={MaxCap=6}}
+Advanced Supply Depot: Rarity="Mythic",BuildingCategory="Special",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=100000,Cycle=10,Income=250}}
+Monitoring Center: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Stealth Helicopter={Cycle=20,MaxUnits=3,SpawnAmount=1}},WaveDefenseUnitProduction={Stealth Helicopter={MaxCap=3}}
+Patrol Station: Rarity="Mythic",BuildingCategory="Units",StructurePower=10000,RequiredPower=50000,UnitProduction={Enforcer={Cycle=20,SpawnRadius=5,SpawnAmount=1}},WaveDefenseUnitProduction={Enforcer={MaxCap=3}}
+Submarine Cavern: Rarity="Mythic",BuildingCategory="Units",StructurePower=7500,RequiredPower=150000,UnitProduction={Submarine={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Submarine={MaxCap=1}}
+Centurion Support Site: Rarity="Unique",BuildingCategory="Units",StructurePower=150000,RequiredPower=1500000,UnitProduction={Centurion={Cycle=180,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Centurion={MaxCap=1}}
+Washing Machine: Rarity="Mythic",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Evade Competitor={Cycle=10,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Evade Competitor={MaxCap=1}}
+Luxury Resort: Rarity="Mythic",BuildingCategory="Production",StructurePower=35000,RequiredPower=500000,ResourceProduction={Money={Capacity=10000000,Cycle=10,Income=40000}}
+Energy Node: Rarity="Mythic",BuildingCategory="Production",StructurePower=0,RequiredPower=35000,ResourceProduction={Money={Capacity=5000000,Cycle=10,Income=9000}}
+Sentinel Training Center: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Sentinel Saboteur={SpawnRadius=5,Cycle=30,MaxUnits=2,SpawnAmount=1}},WaveDefenseUnitProduction={Sentinel Saboteur={MaxCap=2}}
+Hawk's Nest: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Hawk 2A={Cycle=30,SpawnRadius=3,SpawnAmount=2}},WaveDefenseUnitProduction={Hawk 2A={MaxCap=4}}
+Hillside Hangar: Rarity="Mythic",BuildingCategory="Units",StructurePower=7000,RequiredPower=100000,UnitProduction={SU-47={Cycle=25,SpawnRadius=5,SpawnAmount=1}},WaveDefenseUnitProduction={SU-47={MaxCap=3}}
+Heavy Weapons Depot: Rarity="Mythic",BuildingCategory="Units",StructurePower=7000,RequiredPower=100000,UnitProduction={T14={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={T14={MaxCap=2}}
+Deployment Site: Rarity="Legendary",BuildingCategory="Units",StructurePower=10000,RequiredPower=50000,UnitProduction={TIGR={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={TIGR={MaxCap=2}}
+Aviation Hub: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Aerial Assault Carrier={SpawnRadius=5,Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Aerial Assault Carrier={MaxCap=1}}
+Assault Trooper HQ: Rarity="Legendary",BuildingCategory="Units",StructurePower=25000,RequiredPower=100000,UnitProduction={Assault Trooper={Cycle=30,SpawnRadius=5,SpawnAmount=2}},WaveDefenseUnitProduction={Assault Trooper={MaxCap=4}}
+Orbital Solar Array: Rarity="Legendary",BuildingCategory="Production",StructurePower=15000,RequiredPower=150000,ResourceProduction={Money={Capacity=1000000,Cycle=10,Income=5000}}
+Northern Outpost: Rarity="Mythic",BuildingCategory="Units",StructurePower=30000,RequiredPower=250000,UnitProduction={Mammoth={Cycle=45,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Mammoth={MaxCap=2}}
+Robotics Lab: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Prowler={SpawnRadius=5,Cycle=30,MaxUnits=3,SpawnAmount=1}},WaveDefenseUnitProduction={Prowler={MaxCap=2}}
+Reinforced Bunker: Rarity="Mythic",BuildingCategory="Units",StructurePower=7000,RequiredPower=100000,UnitProduction={Type 99A={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Type 99A={MaxCap=2}}
+Science Institute: Rarity="Mythic",BuildingCategory="Production",StructurePower=10000,RequiredPower=250000,ResourceProduction={Money={Capacity=5000000,Cycle=10,Income=50000}}
+Flamethrower Workshop: Rarity="Mythic",BuildingCategory="Units",StructurePower=30000,RequiredPower=250000,UnitProduction={Flametrooper={Cycle=30,SpawnRadius=3,SpawnAmount=1}},WaveDefenseUnitProduction={Flametrooper={MaxCap=2}}
+Tribute to Honor: Rarity="Dev",BuildingCategory="Production",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=999999999,Cycle=10,Income=1}},UnitProduction={Crownguard={Cycle=120,MaxUnits=3,SpawnAmount=3}}
+Ranger Outpost: Rarity="Epic",BuildingCategory="Units",StructurePower=1500,RequiredPower=2000,UnitProduction={Ranger={Cycle=20,SpawnAmount=1}},WaveDefenseUnitProduction={Ranger={MaxCap=3}}
+Planetary Headquarters: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Chimera={SpawnRadius=5,Cycle=50,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Chimera={MaxCap=1}}
+Hazard Buoy: Rarity="Uncommon",BuildingCategory="Units",StructurePower=200,RequiredPower=2000,UnitProduction={Sentinel Speedboat={Cycle=20,SpawnAmount=1}},WaveDefenseUnitProduction={Sentinel Speedboat={MaxCap=3}}
+Automated Factory: Rarity="Mythic",BuildingCategory="Production",StructurePower=11000,RequiredPower=500000,ResourceProduction={Money={Capacity=7500000,Cycle=10,Income=44000}}
+Sentinel Citadel: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Nemesis={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Nemesis={MaxCap=1}}
+Offshore Crane: Rarity="Mythic",BuildingCategory="Production",StructurePower=10000,RequiredPower=250000,ResourceProduction={Money={Capacity=2000000,Cycle=10,Income=40000}}
+Marauder Staging Ground: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Marauder={Cycle=30,MaxUnits=3,SpawnAmount=1}},WaveDefenseUnitProduction={Marauder={MaxCap=2}}
+Headhunter Barracks: Rarity="Mythic",BuildingCategory="Units",StructurePower=0,RequiredPower=100000,UnitProduction={Headhunter={SpawnRadius=3,Cycle=30,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Headhunter={MaxCap=1}}
+Behehemoth Fortress: Rarity="Mythic",BuildingCategory="Units",StructurePower=5000,RequiredPower=150000,UnitProduction={Behehemoth={Cycle=60,SpawnAmount=1}},WaveDefenseUnitProduction={Behehemoth={MaxCap=1}}
+Helipad Outpost: Rarity="Rare",BuildingCategory="Units",StructurePower=1000,RequiredPower=2500,UnitProduction={Little Bird={Cycle=25,SpawnAmount=1}},WaveDefenseUnitProduction={Little Bird={MaxCap=2,Cycle=25}}
+Fabrication Facility: Rarity="Rebirth",BuildingCategory="Production",StructurePower=25000,RequiredPower=750000,ResourceProduction={Money={Capacity=5000000,Cycle=10,Income=90000}}
+Desert Armory: Rarity="Mythic",BuildingCategory="Units",StructurePower=30000,RequiredPower=250000,UnitProduction={Goblin={SpawnRadius=3,Cycle=60,MaxUnits=2,SpawnAmount=2}},WaveDefenseUnitProduction={Goblin={MaxCap=2}}
+Unstable Testing Facility: Rarity="Legendary",BuildingCategory="Units",StructurePower=10000,RequiredPower=100000,UnitProduction={Shredder={Cycle=40,SpawnAmount=1}},WaveDefenseUnitProduction={Shredder={MaxCap=1}}
+Liberty Station: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Liberator={Cycle=30,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Liberator={MaxCap=1}}
+Sentry Station: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Martyr={Cycle=40,SpawnAmount=1}},WaveDefenseUnitProduction={Martyr={MaxCap=2}}
+Phantom Installation: Rarity="Mythic",BuildingCategory="Units",StructurePower=10000,RequiredPower=250000,UnitProduction={Phantom={Cycle=60,MaxCap=1,SpawnAmount=1}},WaveDefenseUnitProduction={Phantom={MaxCap=2}}
+Mitosis: Rarity="Dev",BuildingCategory="Production",StructurePower=0,RequiredPower=0,UnitProduction={Spiky Rolla={Cycle=120,MaxUnits=1,SpawnAmount=1}}
+Alloy Foundry: Rarity="Legendary",BuildingCategory="Production",StructurePower=1000,RequiredPower=80000,ResourceProduction={Money={Capacity=2500000,Cycle=10,Income=11000}}
+Elevated Helipad: Rarity="Mythic",BuildingCategory="Units",StructurePower=10000,RequiredPower=75000,UnitProduction={KA-52={Cycle=40,SpawnRadius=5,SpawnAmount=1}},WaveDefenseUnitProduction={KA-52={MaxCap=3}}
+Oceanic Drill: Rarity="Legendary",BuildingCategory="Production",StructurePower=5000,RequiredPower=50000,ResourceProduction={Money={Capacity=1000000,Cycle=10,Income=7500}}
+Deep Sea Site: Rarity="Mythic",BuildingCategory="Units",StructurePower=5000,RequiredPower=125000,UnitProduction={Zumwalt={Cycle=25,MaxUnits=2,SpawnAmount=1}},WaveDefenseUnitProduction={Zumwalt={MaxCap=2}}
+Synthetic Engineering Site: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={D4-WG={SpawnRadius=5,Cycle=30,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={D4-WG={MaxCap=2}}
+Sector Authority: Rarity="Limited",BuildingCategory="Production",StructurePower=0,RequiredPower=0,ResourceProduction={Money={Capacity=50000000,Cycle=10,Income=70000}}
+Leopard Tankyard: Rarity="Mythic",BuildingCategory="Units",StructurePower=1500,RequiredPower=75000,UnitProduction={Leopard 2A5={Cycle=30,SpawnAmount=1}},WaveDefenseUnitProduction={Leopard 2A5={MaxCap=2}}
+B1 Hangar: Rarity="Mythic",BuildingCategory="Units",StructurePower=20000,RequiredPower=200000,UnitProduction={B1 Lancer={Cycle=60,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={B1 Lancer={MaxUnits=1}}
+Ordnance Assembly: Rarity="Mythic",BuildingCategory="Units",StructurePower=7000,RequiredPower=100000,UnitProduction={PZH 2000={Cycle=30,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={PZH 2000={MaxUnits=2}}
+Airship Docks: Rarity="Limited",BuildingCategory="Units",StructurePower=0,RequiredPower=0,UnitProduction={Zeppelin={SpawnRadius=5,Cycle=45,MaxUnits=1,SpawnAmount=1}},WaveDefenseUnitProduction={Zeppelin={MaxCap=1}}
+Blackhawk Command Post: Rarity="Mythic",BuildingCategory="Units",StructurePower=10000,RequiredPower=75000,UnitProduction={Blackhawk={SpawnRadius=5,Cycle=60,MaxCap=1,SpawnAmount=1}},WaveDefenseUnitProduction={Blackhawk={MaxCap=1}}
+Blender: Rarity="Dev",BuildingCategory="Production",StructurePower=0,RequiredPower=0,UnitProduction={Studio Cube={Cycle=90,MaxUnits=1,SpawnAmount=1}}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Military Base — 2.5D Remake</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<!-- top bar -->
+<div id="topbar">
+  <button class="pill" id="btnShop">💰 SHOP</button>
+  <button class="pill" id="btnHome">🏠 HOME</button>
+</div>
+
+<!-- left rail -->
+<div id="rail">
+  <button class="rail-btn" data-panel="backpack"><span class="r-ico">🎒</span><span class="r-lbl">BACKPACK</span></button>
+  <button class="rail-btn" data-panel="rewards"><span class="r-ico">🎁</span><span class="r-lbl">REWARDS</span></button>
+  <button class="rail-btn" data-panel="robux"><span class="r-ico">💎</span><span class="r-lbl">ROBUX SHOP</span></button>
+  <button class="rail-btn" data-panel="rebirth" id="railRebirth"><span class="r-ico">🔥</span><span class="r-lbl">REBIRTH</span><span class="badge" id="rbBadge" hidden>!</span></button>
+  <button class="rail-btn" data-panel="settings"><span class="r-ico">⚙️</span><span class="r-lbl">SETTINGS</span></button>
+</div>
+
+<!-- event timer (top right) -->
+<div id="timerbox">
+  <div class="t-line" id="tWave">⏱ WAVE 1:30</div>
+  <div class="t-line" id="tBoss">🐍 BOSS 3:00</div>
+</div>
+
+<!-- boss hp bar -->
+<div id="bossbar" hidden>
+  <div class="bb-label">🐍 MECHA WORM</div>
+  <div class="bb-track"><div class="bb-fill" id="bbFill"></div></div>
+</div>
+
+<!-- bottom-left HUD -->
+<div id="hud">
+  <button id="btnAttack">ATTACK</button>
+  <div class="statbar"><span class="s-ico">⭐</span><span id="stPower">0</span><span class="s-cap">PWR</span></div>
+  <div class="statbar"><span class="s-ico">🪖</span><span id="stUnits">0/10</span></div>
+  <div class="statbar cash"><span class="s-ico">💵</span><span id="stCash">$500</span><span class="s-cap" id="stIncome">$0/s</span></div>
+</div>
+
+<!-- control hint -->
+<div id="hint">WASD move • wheel zoom • drag = select • Ctrl+click = move units • RMB = cancel • F1 = ADMIN</div>
+
+<!-- minimap -->
+<div id="minibox"><canvas id="mini" width="150" height="112"></canvas></div>
+<button id="btnAdmin" title="Admin panel (F1 or `)">🛠 ADMIN</button>
+
+<!-- ============ ADMIN DRAWER ============ -->
+<div id="p-admin">
+  <div class="a-head"><span>🛠 ADMIN PANEL</span><button class="x" id="aClose">✕</button></div>
+  <div class="a-body">
+    <div class="a-sec">💵 CASH</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.cash(10000)">+10K</button>
+      <button class="abtn" onclick="Admin.cash(100000)">+100K</button>
+      <button class="abtn" onclick="Admin.cash(1000000)">+1M</button>
+      <button class="abtn" onclick="Admin.cash(100000000)">+100M</button>
+    </div>
+    <div class="a-row">
+      <input id="aCash" class="ain" placeholder="custom (e.g. 2.5M)">
+      <button class="abtn" onclick="Admin.cashCustom()">GIVE</button>
+    </div>
+
+    <div class="a-sec">🏭 BUILDINGS <span class="a-note">BP = backpack • PL = place on plot</span></div>
+    <div id="aBuilds"></div>
+
+    <div class="a-sec">🪖 SUMMON UNITS (at base, ignores cap)</div>
+    <div id="aUnits"></div>
+
+    <div class="a-sec">📦 CRATES (to backpack)</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.crate('standard')">STANDARD</button>
+      <button class="abtn" onclick="Admin.crate('elite')">ELITE</button>
+      <button class="abtn" onclick="Admin.crate('premium')">PREMIUM</button>
+      <button class="abtn gold" onclick="Admin.crate('golden')">GOLDEN</button>
+    </div>
+
+    <div class="a-sec">🤖 BOT BASES (pick a preset — yours stays yours)</div>
+    <div id="aBots" class="a-bots"></div>
+
+    <div class="a-sec">🐍 BOSS</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.boss('summon')">SUMMON</button>
+      <button class="abtn" onclick="Admin.boss('kill')">KILL + REWARD</button>
+      <button class="abtn" onclick="Admin.boss('hp1')">SET 1 HP</button>
+      <button class="abtn" onclick="Admin.boss('more')">+10K HP</button>
+    </div>
+
+    <div class="a-sec">⚠️ WAVES</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.wave('now')">SPAWN NOW</button>
+      <button class="abtn" onclick="Admin.wave('horde')">HORDE x3</button>
+      <button class="abtn" onclick="Admin.wave('reset')">RESET TIMERS</button>
+    </div>
+
+    <div class="a-sec">🚩 POINTS</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.points('take')">CAPTURE ALL</button>
+      <button class="abtn" onclick="Admin.points('lose')">RELEASE TO NEUTRAL</button>
+    </div>
+
+    <div class="a-sec">🔥 REBIRTH</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.rebirth(1)">+1</button>
+      <button class="abtn" onclick="Admin.rebirth(10)">+10</button>
+      <button class="abtn" onclick="Admin.rebirth('force')">FORCE RESET NOW</button>
+    </div>
+
+    <div class="a-sec">⏱ TIME SCALE</div>
+    <div class="a-row" id="aSpeed">
+      <button class="abtn" data-sp="0">⏸</button>
+      <button class="abtn on" data-sp="1">1x</button>
+      <button class="abtn" data-sp="2">2x</button>
+      <button class="abtn" data-sp="5">5x</button>
+      <button class="abtn" data-sp="10">10x</button>
+    </div>
+
+    <div class="a-sec">⚙️ CHEATS</div>
+    <div class="a-row">
+      <button class="abtn tog" id="aGod">GOD MODE</button>
+      <button class="abtn tog" id="aFreeze">FREEZE WAVES/BOSS</button>
+      <button class="abtn tog" id="aNoResp">NO GARRISON RESPAWN</button>
+    </div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.claimRewards()">CLAIM ALL REWARDS</button>
+      <button class="abtn" onclick="Admin.giveAllBuildings()">GIVE ALL BUILDINGS</button>
+    </div>
+
+    <div class="a-sec">📍 TELEPORT CAMERA</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.go('base')">BASE</button>
+      <button class="abtn" onclick="Admin.go('city')">CITY</button>
+      <button class="abtn" onclick="Admin.go('north')">N</button>
+      <button class="abtn" onclick="Admin.go('east')">E</button>
+      <button class="abtn" onclick="Admin.go('south')">S</button>
+      <button class="abtn" onclick="Admin.go('west')">W</button>
+      <button class="abtn" onclick="Admin.go('nw')">NW</button>
+      <button class="abtn" onclick="Admin.go('ne')">NE</button>
+      <button class="abtn" onclick="Admin.go('boss')">BOSS</button>
+    </div>
+
+    <div class="a-sec">📊 DEBUG</div>
+    <div class="a-stats" id="aStats">—</div>
+
+    <div class="a-sec">💾 SAVE DATA</div>
+    <div class="a-row">
+      <button class="abtn" onclick="Admin.exportSave()">EXPORT</button>
+      <button class="abtn" onclick="Admin.importSave()">IMPORT &amp; RELOAD</button>
+      <button class="abtn danger" onclick="Admin.wipe()">WIPE ALL</button>
+    </div>
+    <textarea id="aSave" class="asave" placeholder="save JSON appears here (export) or paste here (import)"></textarea>
+  </div>
+</div>
+
+<!-- toasts -->
+<div id="toasts"></div>
+
+<!-- ============ PANELS ============ -->
+<div class="panel" id="p-shop">
+  <div class="p-head"><span class="p-title">SHOP</span><button class="x" data-close>✕</button></div>
+  <div class="p-body">
+    <div class="tabs" id="shopTabs">
+      <button data-tab="production" class="on">PRODUCTION</button>
+      <button data-tab="units">UNITS</button>
+      <button data-tab="special">SPECIAL</button>
+      <button data-tab="decor">DECOR</button>
+    </div>
+    <div class="grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<div class="panel" id="p-backpack">
+  <div class="p-head"><span class="p-title">BACKPACK</span><button class="x" data-close>✕</button></div>
+  <div class="p-body">
+    <p class="p-note">Buy stuff in the SHOP, then place it on your plot. Click a crate to open it.</p>
+    <div class="grid" id="bpGrid"></div>
+  </div>
+</div>
+
+<div class="panel" id="p-rewards">
+  <div class="p-head"><span class="p-title">REWARDS</span><button class="x" data-close>✕</button></div>
+  <div class="p-body"><div class="rw-list" id="rwList"></div></div>
+</div>
+
+<div class="panel" id="p-robux">
+  <div class="p-head"><span class="p-title">ROBUX SHOP</span><button class="x" data-close>✕</button></div>
+  <div class="p-body">
+    <p class="p-note">This is a fan-made 2.5D remake — no real Robux. Premium items cost in-game cash instead. Premium crates only contain LEGENDARY / MYTHIC buildings. Weekly featured item + pity after 80.</p>
+    <div class="grid" id="rxGrid"></div>
+  </div>
+</div>
+
+<div class="panel" id="p-settings">
+  <div class="p-head"><span class="p-title">SETTINGS</span><button class="x" data-close>✕</button></div>
+  <div class="p-body">
+    <div class="set-row"><span>MUSIC</span><button class="toggle on" id="setMusic">On</button></div>
+    <div class="set-row"><span>BUILDING SFX</span><button class="toggle on" id="setSfx">On</button></div>
+    <div class="set-row"><span>DAMAGE NUMBERS</span><button class="toggle on" id="setDmg">On</button></div>
+    <div class="set-row"><span>GRAPHICS MODE</span><button class="toggle blue on" id="setGfx">High</button></div>
+    <div class="set-row"><span>CODE</span><input id="codeBox" class="code-input" placeholder="Insert Codes Here" autocomplete="off"></div>
+    <div class="set-row small"><span class="dim">Try: LOGI • WOWPREMIUM • SORRY • DUELS • 200K</span></div>
+    <div class="set-row"><span></span><button class="danger" id="btnWipe">HARD RESET</button></div>
+  </div>
+</div>
+
+<div class="panel modal" id="p-rebirth">
+  <div class="p-head"><span class="p-title">🔥 REBIRTH</span><button class="x" data-close>✕</button></div>
+  <div class="p-body center">
+    <div id="rbInfo"></div>
+    <div class="btn-row">
+      <button class="pill big" id="btnRebirthYes">REBIRTH</button>
+      <button class="pill big ghost" data-close>NOT YET</button>
+    </div>
+  </div>
+</div>
+
+<div class="panel modal crate" id="p-crate">
+  <div class="p-body center">
+    <div class="crate-stage" id="crateStage">
+      <canvas id="crateIcon" width="150" height="110"></canvas>
+    </div>
+    <div class="crate-name" id="crateName">OPENING...</div>
+    <div class="crate-rar" id="crateRar"></div>
+    <button class="pill big" id="btnCrateDone">NICE</button>
+  </div>
+</div>
+
+<!-- tutorial -->
+<div id="tut">
+  <div class="tut-card">
+    <div class="tut-step" id="tutStep">1 / 4</div>
+    <div class="tut-text" id="tutText"></div>
+    <div class="btn-row">
+      <button class="pill big" id="tutNext">GOT IT</button>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

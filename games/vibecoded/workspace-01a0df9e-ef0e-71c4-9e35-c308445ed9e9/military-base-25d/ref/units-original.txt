@@ -1,0 +1,116 @@
+Test Unit 3: AttackDamage=10,AttackRate=100,AttackRange=20,MaxTargetRange=50,MovementSpeed=7
+Artemis: Rarity="Dev",MaxHealth=500000,AttackDamage=50000,AttackRate=100,AttackRange=20,MaxTargetRange=50,MovementSpeed=5,DamageModifiers={},Classes={1="Air"}
+Animated Unit Rig Test: Rarity="Common",MaxHealth=150,AttackDamage=12,AttackRate=100,AttackRange=15,MaxTargetRange=32,MovementSpeed=7,UnitSize=1,DamageModifiers={},Classes={1="Light"}
+Medic: Rarity="Epic",MaxHealth=200,AttackDamage=0,AttackRate=100,AttackRange=15,MaxTargetRange=32,MovementSpeed=7,UnitSize=4,DamageModifiers={},Classes={1="Light"}
+Single Mesh: Rarity="Common",MaxHealth=150,AttackDamage=12,AttackRate=100,AttackRange=15,MaxTargetRange=32,MovementSpeed=7,UnitSize=1,DamageModifiers={},Classes={1="Light"}
+Drone: Rarity="Legendary",MaxHealth=250,AttackDamage=17,AttackRate=120,AttackRange=19,MaxTargetRange=32,MovementSpeed=12,UnitSize=2,DamageModifiers={Stealth=0,Light=1.2},Classes={1="Light"}
+Test Unit 2: AttackDamage=10,AttackRate=100,AttackRange=20,MaxTargetRange=50,MovementSpeed=7
+Test Unit: AttackDamage=10,AttackRate=100,AttackRange=20,MaxTargetRange=50,MovementSpeed=7
+Light Tank: Rarity="Epic",MaxHealth=2000,AttackDamage=35,AttackRate=60,AttackRange=20,MaxTargetRange=32,MovementSpeed=6,UnitSize=4,DamageModifiers={Air=0.8,Stealth=0,Light=0.8},Classes={1="Armored"}
+Experimental Unit: Rarity="Legendary",MaxHealth=5000,AttackDamage=30,AttackRate=240,AttackRange=20,MaxTargetRange=32,MovementSpeed=7,UnitSize=7,DamageModifiers={Stealth=0},Classes={1="Armored"}
+B2: Rarity="Limited",MaxHealth=1000,AttackDamage=450,AttackRate=20,AttackRange=30,MaxTargetRange=34,MovementSpeed=15,UnitSize=7,DamageModifiers={Air=0,Stealth=0},Classes={1="Stealth"}
+Double Mesh: Rarity="Common",MaxHealth=150,AttackDamage=12,AttackRate=100,AttackRange=15,MaxTargetRange=32,MovementSpeed=7,UnitSize=1,DamageModifiers={},Classes={1="Light"}
+Humvee: Rarity="Rare",MaxHealth=850,AttackDamage=12,AttackRate=100,AttackRange=13,MaxTargetRange=32,MovementSpeed=9,UnitSize=2,DamageModifiers={Stealth=0},Classes={1="Light"}
+Heavy Tank: Rarity="Legendary",MaxHealth=5000,AttackDamage=110,AttackRate=30,AttackRange=22,MaxTargetRange=32,MovementSpeed=5,UnitSize=7,DamageModifiers={Air=0.5,Stealth=0,Armored=1.2,Light=0.7},Classes={1="Armored"}
+Experimental Fighter: Rarity="Limited",MaxHealth=200,AttackDamage=60,AttackRate=60,AttackRange=18,MaxTargetRange=32,MovementSpeed=18,UnitSize=1,DamageModifiers={Stealth=0},Classes={1="Air"}
+AC-130: Rarity="Limited",MaxHealth=1500,AttackDamage=60,AttackRate=100,AttackRange=29,MaxTargetRange=32,MovementSpeed=6,UnitSize=6,DamageModifiers={Armored=1.2,Stealth=0},Classes={1="Air"}
+Apache: Rarity="Rebirth",MaxHealth=900,AttackDamage=35,AttackRate=120,AttackRange=20,MaxTargetRange=32,MovementSpeed=8,UnitSize=3,DamageModifiers={Air=0.8,Stealth=1,Armored=1.2},Classes={1="Air"}
+Cobra: Rarity="Mythic",MaxHealth=400,AttackDamage=40,AttackRate=120,AttackRange=20,MaxTargetRange=32,MovementSpeed=11,UnitSize=2,DamageModifiers={Armored=0.8,Stealth=0},Classes={1="Air"}
+F15: Rarity="Legendary",MaxHealth=250,AttackDamage=65,AttackRate=75,AttackRange=16,MaxTargetRange=32,MovementSpeed=16,UnitSize=2,DamageModifiers={Air=1.2,Stealth=1,Light=0.8},Classes={1="Air"}
+APC: Rarity="Epic",MaxHealth=1300,AttackDamage=10,AttackRate=60,AttackRange=11,MaxTargetRange=32,MovementSpeed=9,UnitSize=2,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+A10 Warthog: Rarity="Mythic",MaxHealth=850,AttackDamage=16,AttackRate=300,AttackRange=20,MaxTargetRange=32,MovementSpeed=12,UnitSize=4,DamageModifiers={Air=0.8,Stealth=0,Armored=1.2,Light=1.2},Classes={1="Air"}
+Anti-Air Vehicle: Rarity="Legendary",MaxHealth=850,AttackDamage=60,AttackRate=70,AttackRange=25,MaxTargetRange=32,MovementSpeed=6,UnitSize=5,DamageModifiers={Air=1.5,Stealth=0,Armored=0,Light=0},Classes={1="Armored"}
+Railgun Tank: Rarity="Limited",MaxHealth=2300,AttackDamage=800,AttackRate=20,AttackRange=25,MaxTargetRange=32,MovementSpeed=5,UnitSize=6,DamageModifiers={Air=1,Stealth=0,Armored=1.5,Light=0.5},Classes={1="Armored"}
+B52: Rarity="Limited",MaxHealth=1600,AttackDamage=300,AttackRate=30,AttackRange=30,MaxTargetRange=34,MovementSpeed=9,UnitSize=6,DamageModifiers={Air=0,Stealth=0,Armored=2,Light=1},Classes={1="Air"}
+Exotrooper: Rarity="Limited",MaxHealth=3000,AttackDamage=30,AttackRate=240,AttackRange=12,MaxTargetRange=32,MovementSpeed=7,UnitSize=6,DamageModifiers={Air=0.5,Stealth=1},Classes={1="Armored"}
+Party Wagon: Rarity="Mythic",MaxHealth=300,AttackDamage=20,AttackRate=100,AttackRange=16,MaxTargetRange=32,MovementSpeed=11,UnitSize=1,DamageModifiers={Air=1,Stealth=0,Armored=1,Light=1},Classes={1="Light",2="Armored"}
+Hornet: Rarity="Limited",MaxHealth=1200,AttackDamage=30,AttackRate=140,AttackRange=21,MaxTargetRange=32,MovementSpeed=10,UnitSize=3,DamageModifiers={Air=0.8,Stealth=0,Armored=1.2},Classes={1="Air"}
+Behemoth: Rarity="Mythic",MaxHealth=13000,AttackDamage=700,AttackRate=20,AttackRange=19,MaxTargetRange=32,MovementSpeed=4,UnitSize=18,DamageModifiers={Air=0,Stealth=0,Armored=1.2,Light=0.7},Classes={1="Armored"}
+Huey: Rarity="Epic",MaxHealth=700,AttackDamage=20,AttackRate=180,AttackRange=19,MaxTargetRange=32,MovementSpeed=9,UnitSize=4,DamageModifiers={Air=0.8,Stealth=0},Classes={1="Air"}
+Drop Trooper: Rarity="Legendary",MaxHealth=450,AttackDamage=50,AttackRate=100,AttackRange=14,MaxTargetRange=32,MovementSpeed=7,UnitSize=1,DamageModifiers={Stealth=0},Classes={1="Armored"}
+ATV: Rarity="Uncommon",MaxHealth=400,AttackDamage=10,AttackRate=100,AttackRange=11,MaxTargetRange=32,MovementSpeed=12,UnitSize=1,DamageModifiers={Air=0,Stealth=0},Classes={1="Light"}
+Chonk: Rarity="Dev",MaxHealth=5000,AttackDamage=1,AttackRate=120,AttackRange=1,MaxTargetRange=32,MovementSpeed=25,UnitSize=5,DamageModifiers={Air=0},Classes={1="Light"}
+Large Chonk: Rarity="Dev",MaxHealth=1000000,AttackDamage=1,AttackRate=1,AttackRange=1,MaxTargetRange=25,MovementSpeed=2,UnitSize=1,DamageModifiers={},Classes={1="Armored"}
+Leviathan: Rarity="Limited",MaxHealth=15000,AttackDamage=45,AttackRate=240,AttackRange=22,MaxTargetRange=32,MovementSpeed=6,UnitSize=20,DamageModifiers={Air=1.5,Stealth=0.3,Light=0.4},Classes={1="Air"}
+Animated Unit Test: Rarity="Common",MaxHealth=150,AttackDamage=12,AttackRate=100,AttackRange=15,MaxTargetRange=32,MovementSpeed=7,UnitSize=1,DamageModifiers={},Classes={1="Light"}
+Mini-Mecha: Rarity="Mythic",MaxHealth=10000,AttackDamage=160,AttackRate=60,AttackRange=24,MaxTargetRange=32,MovementSpeed=7,UnitSize=18,DamageModifiers={Stealth=0,Light=0.6},Classes={1="Air"}
+Viper: Rarity="Legendary",MaxHealth=2500,AttackDamage=30,AttackRate=90,AttackRange=11,MaxTargetRange=32,MovementSpeed=9,UnitSize=4,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+Mobile Flak: Rarity="Epic",MaxHealth=650,AttackDamage=20,AttackRate=120,AttackRange=22,MaxTargetRange=32,MovementSpeed=6,UnitSize=3,DamageModifiers={Air=1.5,Stealth=1,Armored=0,Light=0},Classes={1="Armored"}
+Mantis: Rarity="Legendary",MaxHealth=1000,AttackDamage=80,AttackRate=60,AttackRange=21,MaxTargetRange=32,MovementSpeed=9,UnitSize=5,DamageModifiers={Air=1.2,Stealth=0,Light=0.8},Classes={1="Armored"}
+F22: Rarity="Limited",MaxHealth=350,AttackDamage=45,AttackRate=120,AttackRange=18,MaxTargetRange=32,MovementSpeed=17,UnitSize=2,DamageModifiers={Armored=1.2,Stealth=1},Classes={1="Air"}
+Providence: Rarity="Dev",MaxHealth=25000,AttackDamage=100,AttackRate=300,AttackRange=24,MaxTargetRange=35,MovementSpeed=6,UnitSize=20,DamageModifiers={Stealth=1,Light=0.6},Classes={1="Air",2="Armored"}
+UAV: Rarity="Mythic",MaxHealth=500,AttackDamage=60,AttackRate=60,AttackRange=22,MaxTargetRange=35,MovementSpeed=15,UnitSize=2,DamageModifiers={Air=0,Stealth=1,Light=1.4},Classes={1="Air"}
+ICBM Launcher: Rarity="Limited",MaxHealth=1500,AttackDamage=1000,AttackRate=7,AttackRange=31,MaxTargetRange=35,MovementSpeed=6,UnitSize=7,DamageModifiers={Air=0,Stealth=0,Armored=1.2},Classes={1="Armored"}
+Valkyrie: Rarity="Mythic",MaxHealth=700,AttackDamage=80,AttackRate=120,AttackRange=26,MaxTargetRange=32,MovementSpeed=6,UnitSize=5,DamageModifiers={Stealth=0,Armored=0,Light=0},Classes={1="Armored"}
+Flagship: Rarity="Limited",MaxHealth=15000,AttackDamage=70,AttackRate=180,AttackRange=32,MaxTargetRange=32,MovementSpeed=6,UnitSize=10,DamageModifiers={Air=0.5,Stealth=0},Classes={1="Armored"}
+Gunboat: Rarity="Rare",MaxHealth=500,AttackDamage=30,AttackRate=120,AttackRange=19,MaxTargetRange=32,MovementSpeed=12,UnitSize=2,DamageModifiers={Air=0,Stealth=0,Light=0.7},Classes={1="Armored"}
+Frigate: Rarity="Epic",MaxHealth=2200,AttackDamage=45,AttackRate=120,AttackRange=23,MaxTargetRange=32,MovementSpeed=9,UnitSize=5,DamageModifiers={Stealth=1,Light=0.7},Classes={1="Armored"}
+Battleship: Rarity="Mythic",MaxHealth=12500,AttackDamage=80,AttackRate=120,AttackRange=30,MaxTargetRange=32,MovementSpeed=6,UnitSize=10,DamageModifiers={Air=0.5,Stealth=0},Classes={1="Armored"}
+Carrier: Rarity="Mythic",MaxHealth=12500,AttackDamage=100,AttackRate=60,AttackRange=30,MaxTargetRange=32,MovementSpeed=6,UnitSize=18,DamageModifiers={Stealth=0},Classes={1="Armored"}
+F35: Rarity="Limited",MaxHealth=300,AttackDamage=60,AttackRate=120,AttackRange=19,MaxTargetRange=32,MovementSpeed=21,UnitSize=2,DamageModifiers={Stealth=1},Classes={1="Air"}
+F18: Rarity="Legendary",MaxHealth=250,AttackDamage=65,AttackRate=75,AttackRange=16,MaxTargetRange=32,MovementSpeed=16,UnitSize=1,DamageModifiers={Armored=1.2,Stealth=0},Classes={1="Air"}
+Drone Carrier: Rarity="Limited",MaxHealth=2500,AttackDamage=10,AttackRate=60,AttackRange=30,MaxTargetRange=32,MovementSpeed=6,UnitSize=8,DamageModifiers={Stealth=0},Classes={1="Armored"}
+Swarm Drone: Rarity="Limited",MaxHealth=250,AttackDamage=14,AttackRate=180,AttackRange=16,MaxTargetRange=32,MovementSpeed=15,UnitSize=1,DamageModifiers={Stealth=0,Light=1.2},Classes={1="Light"}
+M1 Abrams: Rarity="Mythic",MaxHealth=2000,AttackDamage=100,AttackRate=35,AttackRange=22,MaxTargetRange=32,MovementSpeed=6,UnitSize=5,DamageModifiers={Air=0.7,Stealth=0},Classes={1="Armored"}
+Artillery Truck: Rarity="Legendary",MaxHealth=900,AttackDamage=300,AttackRate=20,AttackRange=28,MaxTargetRange=35,MovementSpeed=6,UnitSize=5,DamageModifiers={Air=0,Stealth=0,Light=0.8},Classes={1="Armored"}
+Spectre: Rarity="Mythic",MaxHealth=400,AttackDamage=50,AttackRate=180,AttackRange=19,MaxTargetRange=32,MovementSpeed=20,UnitSize=3,DamageModifiers={Stealth=0},Classes={1="Air"}
+Colossus: Rarity="Limited",MaxHealth=7000,AttackDamage=140,AttackRate=90,AttackRange=22,MaxTargetRange=32,MovementSpeed=6,UnitSize=20,DamageModifiers={Air=0.7,Stealth=0,Light=0.7},Classes={1="Air"}
+Assault Suit: Rarity="Limited",MaxHealth=800,AttackDamage=60,AttackRate=100,AttackRange=21,MaxTargetRange=32,MovementSpeed=7,UnitSize=3,DamageModifiers={Air=0.8,Stealth=0,Armored=1.1,Light=0.9},Classes={1="Light",2="Armored"}
+Commando: Rarity="Rare",MaxHealth=350,AttackDamage=15,AttackRate=100,AttackRange=18,MaxTargetRange=32,MovementSpeed=7,UnitSize=1,DamageModifiers={Stealth=1},Classes={1="Light"}
+Specialist: Rarity="Limited",MaxHealth=300,AttackDamage=1500,AttackRate=10,AttackRange=32,MaxTargetRange=32,MovementSpeed=5,UnitSize=3,DamageModifiers={Air=1,Stealth=0,Armored=1.5,Light=0.5},Classes={1="Light"}
+Sniper: Rarity="Uncommon",MaxHealth=40,AttackDamage=80,AttackRate=30,AttackRange=28,MaxTargetRange=32,MovementSpeed=5,UnitSize=1,DamageModifiers={Stealth=0,Light=1.5},Classes={1="Light"}
+Scout: Rarity="Common",MaxHealth=125,AttackDamage=16,AttackRate=100,AttackRange=14,MaxTargetRange=32,MovementSpeed=9,UnitSize=1,DamageModifiers={Stealth=0},Classes={1="Light"}
+Rocket Trooper: Rarity="Rare",MaxHealth=150,AttackDamage=90,AttackRate=20,AttackRange=20,MaxTargetRange=32,MovementSpeed=6,UnitSize=2,DamageModifiers={Armored=1.5,Stealth=1},Classes={1="Light"}
+Precursor: Rarity="Limited",MaxHealth=8000,AttackDamage=30,AttackRate=200,AttackRange=20,MaxTargetRange=33,MovementSpeed=4,UnitSize=12,DamageModifiers={Stealth=1,Armored=0.8,Light=1.2},Classes={1="Armored"}
+Operative: Rarity="Mythic",MaxHealth=750,AttackDamage=40,AttackRate=100,AttackRange=20,MaxTargetRange=32,MovementSpeed=7,UnitSize=2,DamageModifiers={Stealth=0},Classes={1="Light"}
+Officer: Rarity="Mythic",MaxHealth=300,AttackDamage=0,AttackRate=100,AttackRange=15,MaxTargetRange=32,MovementSpeed=7,UnitSize=2,DamageModifiers={},Classes={1="Light"}
+Light Infantry: Rarity="Common",MaxHealth=150,AttackDamage=12,AttackRate=100,AttackRange=16,MaxTargetRange=32,MovementSpeed=7,UnitSize=1,DamageModifiers={Stealth=0},Classes={1="Light"}
+Juggernaut: Rarity="Legendary",MaxHealth=2000,AttackDamage=40,AttackRate=100,AttackRange=14,MaxTargetRange=32,MovementSpeed=7,UnitSize=3,DamageModifiers={Stealth=0},Classes={1="Armored"}
+Heavy Infantry: Rarity="Uncommon",MaxHealth=550,AttackDamage=8,AttackRate=180,AttackRange=14,MaxTargetRange=32,MovementSpeed=7,UnitSize=2,DamageModifiers={Stealth=0},Classes={1="Armored"}
+Stealth Helicopter: Rarity="Limited",MaxHealth=800,AttackDamage=80,AttackRate=80,AttackRange=19,MaxTargetRange=32,MovementSpeed=13,UnitSize=5,DamageModifiers={Air=0.7,Stealth=1,Light=1.1},Classes={1="Stealth"}
+Enforcer: Rarity="Mythic",MaxHealth=440,AttackDamage=35,AttackRate=120,AttackRange=18,MaxTargetRange=32,MovementSpeed=16,UnitSize=3,DamageModifiers={Air=1.2},Classes={1="Air"}
+Centurion: Rarity="Unique",MaxHealth=2500,AttackDamage=20000,AttackRate=4,AttackRange=10000,MaxTargetRange=11000,MovementSpeed=6,UnitSize=15,DamageModifiers={},Classes={1="Armored"}
+Legionnaire: Rarity="Unique",MaxHealth=200,AttackDamage=0,AttackRate=60,AttackRange=19,MaxTargetRange=32,MovementSpeed=12,UnitSize=1,DamageModifiers={},Classes={1="Stealth"}
+Submarine: Rarity="Mythic",MaxHealth=2500,AttackDamage=120,AttackRate=60,AttackRange=28,MaxTargetRange=32,MovementSpeed=9,UnitSize=12,DamageModifiers={Air=0,Stealth=1},Classes={1="Stealth"}
+Sentinel Saboteur: Rarity="Limited",MaxHealth=275,AttackDamage=200,AttackRate=60,AttackRange=15,MaxTargetRange=32,MovementSpeed=9,UnitSize=1,DamageModifiers={Air=1,Stealth=0},Classes={1="Light",2="Stealth"}
+Cannon: Rarity="Mythic",MaxHealth=500,AttackDamage=30,AttackRate=60,AttackRange=20,MaxTargetRange=32,MovementSpeed=6,UnitSize=1,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+Evade Competitor: Rarity="Mythic",MaxHealth=1000,AttackDamage=1000,AttackRate=60,AttackRange=3,MaxTargetRange=32,MovementSpeed=20,UnitSize=1,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+Wasp: Rarity="Mythic",MaxHealth=600,AttackDamage=80,AttackRate=60,AttackRange=21,MaxTargetRange=32,MovementSpeed=15,UnitSize=3,DamageModifiers={Air=0.7,Stealth=1,Light=1.1},Classes={1="Air"}
+Hawk 2A: Rarity="Limited",MaxHealth=400,AttackDamage=80,AttackRate=100,AttackRange=21,MaxTargetRange=32,MovementSpeed=20,UnitSize=2,DamageModifiers={Stealth=0,Armored=0.5,Light=0.5},Classes={1="Air"}
+SU-47: Rarity="Mythic",MaxHealth=200,AttackDamage=100,AttackRate=60,AttackRange=19,MaxTargetRange=32,MovementSpeed=23,UnitSize=2,DamageModifiers={Stealth=1},Classes={1="Air"}
+TIGR: Rarity="Legendary",MaxHealth=1200,AttackDamage=25,AttackRate=100,AttackRange=13,MaxTargetRange=32,MovementSpeed=10,UnitSize=3,DamageModifiers={Stealth=0},Classes={1="Armored"}
+T14: Rarity="Mythic",MaxHealth=1400,AttackDamage=80,AttackRate=60,AttackRange=21,MaxTargetRange=32,MovementSpeed=8,UnitSize=4,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+Mammoth: Rarity="Mythic",MaxHealth=5000,AttackDamage=300,AttackRate=30,AttackRange=20,MaxTargetRange=32,MovementSpeed=9,UnitSize=10,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+Aerial Assault Carrier: Rarity="Limited",MaxHealth=7000,AttackDamage=100,AttackRate=60,AttackRange=25,MaxTargetRange=32,MovementSpeed=5,UnitSize=15,DamageModifiers={Air=0.7,Stealth=0,Light=0.7},Classes={1="Air",2="Armored"}
+Vulture: Rarity="Limited",MaxHealth=300,AttackDamage=80,AttackRate=60,AttackRange=18,MaxTargetRange=32,MovementSpeed=12,UnitSize=1,DamageModifiers={Stealth=1},Classes={1="Air"}
+Assault Trooper: Rarity="Legendary",MaxHealth=500,AttackDamage=100,AttackRate=60,AttackRange=18,MaxTargetRange=32,MovementSpeed=10,UnitSize=2,DamageModifiers={Stealth=0},Classes={1="Armored"}
+Type 99A: Rarity="Mythic",MaxHealth=2500,AttackDamage=80,AttackRate=40,AttackRange=20,MaxTargetRange=32,MovementSpeed=7,UnitSize=6,DamageModifiers={Air=0.7,Stealth=0},Classes={1="Armored"}
+Prowler: Rarity="Limited",MaxHealth=1000,AttackDamage=300,AttackRate=30,AttackRange=29,MaxTargetRange=33,MovementSpeed=14,UnitSize=5,DamageModifiers={Air=0,Stealth=0,Armored=0.8,Light=1.2},Classes={1="Armored"}
+Crownguard: Rarity="Dev",MaxHealth=1500,AttackDamage=60,AttackRate=60,AttackRange=35,MaxTargetRange=35,MovementSpeed=5,UnitSize=3,DamageModifiers={Air=1,Stealth=1,Armored=1.5,Light=0.5},Classes={1="Armored"}
+Chimera: Rarity="Limited",MaxHealth=8000,AttackDamage=45,AttackRate=240,AttackRange=28,MaxTargetRange=32,MovementSpeed=8,UnitSize=12,DamageModifiers={Air=0.8,Stealth=0},Classes={1="Air"}
+Flametrooper: Rarity="Mythic",MaxHealth=1000,AttackDamage=60,AttackRate=120,AttackRange=12,MaxTargetRange=32,MovementSpeed=9,UnitSize=5,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+Ranger: Rarity="Epic",MaxHealth=600,AttackDamage=15,AttackRate=180,AttackRange=18,MaxTargetRange=32,MovementSpeed=7,UnitSize=3,DamageModifiers={Stealth=0},Classes={1="Light"}
+Sentinel Speedboat: Rarity="Uncommon",MaxHealth=200,AttackDamage=35,AttackRate=60,AttackRange=16,MaxTargetRange=32,MovementSpeed=14,UnitSize=1,DamageModifiers={Air=0,Stealth=0,Light=0.7},Classes={1="Light"}
+Nemesis: Rarity="Limited",MaxHealth=12000,AttackDamage=100,AttackRate=120,AttackRange=32,MaxTargetRange=32,MovementSpeed=8,UnitSize=12,DamageModifiers={Air=0.7,Stealth=1},Classes={1="Armored"}
+Behehemoth: Rarity="Mythic",MaxHealth=13000,AttackDamage=700,AttackRate=20,AttackRange=19,MaxTargetRange=32,MovementSpeed=4,UnitSize=18,DamageModifiers={Air=0,Stealth=0,Armored=1.2,Light=0.7},Classes={1="Armored"}
+Marauder: Rarity="Limited",MaxHealth=1700,AttackDamage=40,AttackRate=180,AttackRange=15,MaxTargetRange=33,MovementSpeed=12,UnitSize=5,DamageModifiers={Stealth=0,Armored=1.5,Light=0.75},Classes={1="Light"}
+Headhunter: Rarity="Mythic",MaxHealth=225,AttackDamage=500,AttackRate=12,AttackRange=32,MaxTargetRange=32,MovementSpeed=7,UnitSize=2,DamageModifiers={Stealth=1},Classes={1="Light"}
+Little Bird: Rarity="Rare",MaxHealth=300,AttackDamage=40,AttackRate=60,AttackRange=19,MaxTargetRange=32,MovementSpeed=10,UnitSize=2,DamageModifiers={Air=0.7,Stealth=1,Light=1.1},Classes={1="Air"}
+Goblin: Rarity="Mythic",MaxHealth=600,AttackDamage=60,AttackRate=90,AttackRange=23,MaxTargetRange=33,MovementSpeed=13,UnitSize=2,DamageModifiers={Stealth=1,Light=1.5},Classes={1="Light"}
+Blackhawk Ranger: Rarity="Mythic",MaxHealth=600,AttackDamage=65,AttackRate=60,AttackRange=19,MaxTargetRange=32,MovementSpeed=7,UnitSize=2,DamageModifiers={Stealth=1},Classes={1="Light"}
+Airship Marine: Rarity="Mythic",MaxHealth=500,AttackDamage=50,AttackRate=100,AttackRange=20,MaxTargetRange=32,MovementSpeed=7,UnitSize=2,DamageModifiers={Stealth=1},Classes={1="Light"}
+Blackhawk: Rarity="Mythic",MaxHealth=800,AttackDamage=70,AttackRate=60,AttackRange=19,MaxTargetRange=32,MovementSpeed=11,UnitSize=7,DamageModifiers={Air=0.7,Stealth=0,Armored=0.5,Light=2},Classes={1="Air"}
+Studio Cube: Rarity="Dev",MaxHealth=10000,AttackDamage=100,AttackRate=300,AttackRange=24,MaxTargetRange=35,MovementSpeed=6,UnitSize=5,DamageModifiers={Stealth=1},Classes={1="Air"}
+Leopard 2A5: Rarity="Mythic",MaxHealth=3000,AttackDamage=180,AttackRate=30,AttackRange=20,MaxTargetRange=32,MovementSpeed=9,UnitSize=7,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+PZH 2000: Rarity="Mythic",MaxHealth=1000,AttackDamage=600,AttackRate=10,AttackRange=28,MaxTargetRange=35,MovementSpeed=6,UnitSize=5,DamageModifiers={Air=0,Stealth=0},Classes={1="Armored"}
+B1 Lancer: Rarity="Mythic",MaxHealth=800,AttackDamage=300,AttackRate=30,AttackRange=27,MaxTargetRange=34,MovementSpeed=18,UnitSize=5,DamageModifiers={Air=0,Stealth=0},Classes={1="Air"}
+Zeppelin: Rarity="Limited",MaxHealth=15000,AttackDamage=250,AttackRate=30,AttackRange=29,MaxTargetRange=32,MovementSpeed=6,UnitSize=15,DamageModifiers={Air=0,Stealth=1},Classes={1="Air"}
+Phantom: Rarity="Mythic",MaxHealth=1200,AttackDamage=115,AttackRate=40,AttackRange=19,MaxTargetRange=32,MovementSpeed=8,UnitSize=4,DamageModifiers={Air=0.5,Stealth=0},Classes={1="Stealth",2="Armored"}
+Spiky Rolla: Rarity="Dev",MaxHealth=50000,AttackDamage=5000,AttackRate=60,AttackRange=1,MaxTargetRange=32,MovementSpeed=1,UnitSize=10,DamageModifiers={Air=0},Classes={1="Armored"}
+D4-WG: Rarity="Limited",MaxHealth=3000,AttackDamage=50,AttackRate=90,AttackRange=31,MaxTargetRange=32,MovementSpeed=7,UnitSize=7,DamageModifiers={Air=0,Stealth=1},Classes={1="Armored"}
+KA-52: Rarity="Mythic",MaxHealth=1000,AttackDamage=40,AttackRate=120,AttackRange=26,MaxTargetRange=32,MovementSpeed=11,UnitSize=5,DamageModifiers={Stealth=1},Classes={1="Air"}
+Seeker: Rarity="Limited",MaxHealth=550,AttackDamage=60,AttackRate=60,AttackRange=18,MaxTargetRange=32,MovementSpeed=16,UnitSize=2,DamageModifiers={Stealth=1},Classes={1="Air"}
+Shredder: Rarity="Legendary",MaxHealth=900,AttackDamage=30,AttackRate=240,AttackRange=20,MaxTargetRange=32,MovementSpeed=15,UnitSize=2,DamageModifiers={Air=0,Stealth=0},Classes={1="Light"}
+Liberator: Rarity="Limited",MaxHealth=9000,AttackDamage=50,AttackRate=120,AttackRange=30,MaxTargetRange=32,MovementSpeed=6,UnitSize=15,DamageModifiers={Air=1.3,Stealth=0},Classes={1="Air"}
+Martyr: Rarity="Limited",MaxHealth=900,AttackDamage=75,AttackRate=60,AttackRange=22,MaxTargetRange=32,MovementSpeed=8,UnitSize=4,DamageModifiers={Air=0,Stealth=1},Classes={1="Light"}
+Zumwalt: Rarity="Mythic",MaxHealth=2000,AttackDamage=100,AttackRate=60,AttackRange=24,MaxTargetRange=32,MovementSpeed=9,UnitSize=6,DamageModifiers={Stealth=1},Classes={1="Stealth"}
